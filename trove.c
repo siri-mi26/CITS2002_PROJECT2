@@ -40,7 +40,9 @@ void get_trovefile()
 {
 }
 /*Builds new trovefile/index from the given filelist
-This will replace any existing trovefile with the same name*/
+This will replace any existing trovefile with the same name
+
+*/
 void build_trovefile()
 {
 }
