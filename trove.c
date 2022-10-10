@@ -25,11 +25,11 @@ OR
 void commandline_checker()
 {
     /* 
-    if "-f" provided:
     if "-b" provided:
-    if "-r" provided:
-    if "-u" provided:
+    if "-f" provided:
     if "-l" provided:
+    if "-r" provided:
+    if "-u" provided:    
     if "word" provided:
     if "filelist" provided:
 
