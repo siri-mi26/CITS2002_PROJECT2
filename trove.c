@@ -10,6 +10,7 @@ It can be used to:
 -Remove information from such an index
 -Update an existing index
 */
+// github test 
 
 #include <stdio.h>
 #include <stdlib.h>
