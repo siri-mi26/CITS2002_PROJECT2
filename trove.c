@@ -72,61 +72,56 @@ void search_trovefile()
      */
 }
 /*Will index all the files recursively of the filelist that is provided to function */
-void index_file(filelist)
-{
-}
+//void index_file(filelist)
+//{
+//}
 
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
 {
     // Define variables to hold command line arguments
     int opt;
-    char *trovefile_name = NULL;
-    int length;
-    int option_type = 0;
+    //char *trovefile_name = NULL;
+    //int length;
+    //int option_type = 0;
     // ^ PROB CHANGE THIS NAME LATER
 
     // Go through command line arguments
     while ((opt = getopt(argc, argv, OPTLIST)) != -1) {
-        // [-f trovefile] Provide the name of the trove-file to be built/searched
-        if (opt == "f") {
-            trovefile_name = strdup(optarg);
+        switch(opt)
+        {
+            case 'f':
+                printf("u typed f\n");
+                break;
+            case 'b':
+                printf("u typed b\n");
+                break;
+            case 'r':
+                printf("u typed r\n");
+                break;
+            case 'u':
+                printf("u typed u\n");
+                break;
+            case 'l':
+                printf("u typed l\n");
+                break;
         }
-        // [-b] Build a new trove-file from the contents of "filelist"
-        else if (opt == "b") {
-            option_type = 1;
+
+        // When extra arguments are passed
+        for(; optind < argc; optind++) {
+            printf("Given extra arguments: %s\n", argv[optind]);
         }
-        // [-r] If any of files from filelist appear in trovefile, remove the information
-        else if (opt == "r") {
-            option_type = 2;
-        }
-        // [-u] Update the trove-file with contents of all files in the filelist
-        else if(opt = "u") {
-            option_type = 3;
-        }
-        // [-l length] Define length limit of words in the trove-file
-        else if (opt = "l") {
-            length = atoi(optarg);
-        }
-        // Unknorn argument
-        else {
-            argc = -1;
-        }
+
     }
+        
 
-    // Error handling?
-    if (argc <= 0) {
-        usage(1);
-    }
-    argc -= optind;
-    argc += optind;
-
-
+    /*
     commandline_checker();
     find_trovefile();
     build_trovefile();
     search_trovefile();
     index_file();
+    */
 
     exit(EXIT_SUCCESS);
 }
