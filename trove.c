@@ -81,9 +81,9 @@ int main(int argc, char *argv[])
 {
     // Define variables to hold command line arguments
     int opt;
-    //char *trovefile_name = NULL;
-    //int length;
-    //int option_type = 0;
+    char *trovefile_name = NULL;
+    int length;
+    int option_type = 0;
     // ^ PROB CHANGE THIS NAME LATER
 
     // Go through command line arguments
@@ -92,26 +92,34 @@ int main(int argc, char *argv[])
         {
             case 'f':
                 printf("u typed f\n");
+                trovefile_name = strdup(optarg);
+                printf("f option: %s\n", trovefile_name);
                 break;
             case 'b':
                 printf("u typed b\n");
+                option_type = 1;
                 break;
             case 'r':
                 printf("u typed r\n");
+                option_type = 2;
                 break;
             case 'u':
                 printf("u typed u\n");
+                option_type = 3;
                 break;
             case 'l':
                 printf("u typed l\n");
+                length = atoi(optarg);
                 break;
         }
     }
     
     // When extra arguments are passed
-        for(; optind < argc; optind++) {
-            printf("Given extra arguments: %s\n", argv[optind]);
-        }
+    for(; optind < argc; optind++) {
+        printf("Unknown argument given: %s\n", argv[optind]);
+    }
+
+
         
 
     /*
