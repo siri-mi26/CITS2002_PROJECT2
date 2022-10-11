@@ -10,14 +10,19 @@ It can be used to:
 -Remove information from such an index
 -Update an existing index
 */
-// github test 
-// Bruh i'm trying to push to github why isn't it working
+
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include <unistd.h>
+
+// Add the command line argument options:
+#define OPTLIST                 "f:brul:"
+
+
 // #include <trove.h>
 /* This file checks command line options to determine whether:
 -A word is being searched for (when found, the filenames containing the word will be returned)
@@ -74,6 +79,48 @@ void index_file(filelist)
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
 {
+    // Define variables to hold command line arguments
+    int opt;
+    char *trovefile_name = NULL;
+    int length;
+    int option_type = 0;
+    // ^ PROB CHANGE THIS NAME LATER
+
+    // Go through command line arguments
+    while ((opt = getopt(argc, argv, OPTLIST)) != -1) {
+        // [-f trovefile] Provide the name of the trove-file to be built/searched
+        if (opt == "f") {
+            trovefile_name = strdup(optarg);
+        }
+        // [-b] Build a new trove-file from the contents of "filelist"
+        else if (opt == "b") {
+            option_type = 1;
+        }
+        // [-r] If any of files from filelist appear in trovefile, remove the information
+        else if (opt == "r") {
+            option_type = 2;
+        }
+        // [-u] Update the trove-file with contents of all files in the filelist
+        else if(opt = "u") {
+            option_type = 3;
+        }
+        // [-l length] Define length limit of words in the trove-file
+        else if (opt = "l") {
+            length = atoi(optarg);
+        }
+        // Unknorn argument
+        else {
+            argc = -1;
+        }
+    }
+
+    // Error handling?
+    if (argc <= 0) {
+        usage(1);
+    }
+    argc -= optind;
+    argc += optind;
+
 
     commandline_checker();
     find_trovefile();
