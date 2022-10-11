@@ -106,13 +106,12 @@ int main(int argc, char *argv[])
                 printf("u typed l\n");
                 break;
         }
-
-        // When extra arguments are passed
+    }
+    
+    // When extra arguments are passed
         for(; optind < argc; optind++) {
             printf("Given extra arguments: %s\n", argv[optind]);
         }
-
-    }
         
 
     /*
