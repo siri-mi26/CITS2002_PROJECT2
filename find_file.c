@@ -19,7 +19,7 @@ int listFiles(const char *dirname)
     entity = readdir(dir);
     while (entity != NULL)
     {
-        printf("%s\n", entity->d_name);
+        printf("Filename inside directory: %s\n", entity->d_name);
         entity = readdir(dir);
     }
     closedir(dir);

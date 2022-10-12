@@ -59,7 +59,6 @@ void update_trovefile() {
 }
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
-
 {
     find_file(argc,argv);
     // hash_table();
@@ -72,6 +71,7 @@ int main(int argc, char *argv[])
     char *trovefile_name = NULL;
     // int length;
     int option_type;
+    int cmd_opts = 0;
 
     // ^ PROB CHANGE THIS NAME LATER
 
@@ -84,6 +84,7 @@ int main(int argc, char *argv[])
         {
 
         case 'f':
+            cmd_opts += 2;
             printf("u typed f\n");
             trovefile_name = optarg;
             printf("f option: %s\n", trovefile_name);
@@ -100,27 +101,43 @@ int main(int argc, char *argv[])
             }
             break;
         case 'b':
+            cmd_opts += 1;
             printf("u typed b\n");
             option_type = 1;
             update_trovefile(option_type);
             break;
         case 'r':
+            cmd_opts += 1;
             printf("u typed r\n");
             option_type = 2;
             remove_trovefile();
             break;
         case 'u':
+            cmd_opts += 1;
             printf("u typed u\n");
             option_type = 3;
             update_trovefile();
             break;
         case 'l':
+            cmd_opts += 2;
             printf("u typed l\n");
             // length = atoi(&optarg);
             break;
         }
         
     }
+
+    printf("Argc: %i\n", argc);
+    printf("Command Options: %i\n", cmd_opts);
+
+    int i;
+    // Get additional command line arguments
+    // These are filelist names (I think)
+    for (i = (1+cmd_opts); i < (argc); ++i) {
+        printf("Filelist name %i: %s\n",(i-cmd_opts), argv[i]);
+        
+    }
+    
 
     /* When extra arguments are passed */
     // for(; optind < argc; optind++) {
