@@ -6,6 +6,10 @@
 #include <unistd.h>
 #include "trove.h"
 
-void index_file() {
-    printf("do ma lil dancey dance");
+/* Will index all the files recursively of the filelist that is provided to function */
+void index_file(char *filelist[]) {
+    
 }
+
+
+

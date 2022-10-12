@@ -11,7 +11,6 @@ It can be used to:
 -Update an existing index
 */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,9 +21,7 @@ It can be used to:
 #include <getopt.h>
 
 // Add the command line argument options:
-#define OPTLIST                 "f:brul:"
-
-
+#define OPTLIST "f:brul:"
 
 /* This file checks command line options to determine whether:
 -A word is being searched for (when found, the filenames containing the word will be returned)
@@ -33,12 +30,12 @@ OR
 */
 void commandline_checker()
 {
-    /* 
+    /*
     if "-b" provided:
     if "-f" provided:
     if "-l" provided:
     if "-r" provided:
-    if "-u" provided:  
+    if "-u" provided:
 
     if b,r,u provided, assume arguments will be filelist
     else it's a word
@@ -54,22 +51,17 @@ void get_trovefile()
 }
 /*Builds new trovefile/index from the given filelist
 This will replace any existing trovefile with the same name
-
 */
 void build_trovefile()
 {
 }
 
+void remove_trovefile() {
 
-/* Will index all the files recursively of the filelist that is provided to function */
-//void index_file(filelist)
-//{
-//}
+}
+void update_trovefile() {
 
-// void index_file() {
-    
-// }
-
+}
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
 
@@ -82,50 +74,56 @@ int main(int argc, char *argv[])
     char *trovefile_name = NULL;
     // int length;
     int option_type;
-    
-    
-    
+
     // ^ PROB CHANGE THIS NAME LATER
 
     // Go through command line arguments
-    while ((opt = getopt(argc, argv, OPTLIST)) != -1) {
-        
-        printf("%i\n",opt);
-        switch(opt)
+    while ((opt = getopt(argc, argv, OPTLIST)) != -1)
+    {
+
+        printf("%i\n", opt);
+        switch (opt)
         {
 
-            case 'f':
-                printf("u typed f\n");
-                trovefile_name = optarg;
-                printf("f option: %s\n", trovefile_name);
-                break;
-            case 'b':
-                printf("u typed b\n");
-                option_type = 1;
-                break;
-            case 'r':
-                printf("u typed r\n");
-                option_type = 2;
-                break;
-            case 'u':
-                printf("u typed u\n");
-                option_type = 3;
-                break;
-            case 'l':
-                printf("u typed l\n");
-                // length = atoi(&optarg);
-                break;
+        case 'f':
+            printf("u typed f\n");
+            trovefile_name = optarg;
+            printf("f option: %s\n", trovefile_name);
+            
+            // if -f and word: It searches for word, reading from the trove-file.
+            if (argc == 4) {
+                //could be filelist or word
+                //check if word or filelist func();
+                is_file(argv[3]);
+            }
+            break;
+        case 'b':
+            printf("u typed b\n");
+            option_type = 1;
+            build_trovefile(option_type);
+            break;
+        case 'r':
+            printf("u typed r\n");
+            option_type = 2;
+            remove_trovefile();
+            break;
+        case 'u':
+            printf("u typed u\n");
+            option_type = 3;
+            update_trovefile();
+            break;
+        case 'l':
+            printf("u typed l\n");
+            // length = atoi(&optarg);
+            break;
         }
-        build_trovefile(option_type);
+        
     }
-    
+
     /* When extra arguments are passed */
     // for(; optind < argc; optind++) {
     //     printf("Unknown argument given: %s\n", argv[optind]);
     // }
-
-
-        
 
     /*
     commandline_checker();
