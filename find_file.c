@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,25 +7,36 @@
 #include <unistd.h>
 #include <dirent.h>
 #include "trove.h"
-
-int listFiles(const char *dirname)
+#define DT_DIR 4
+/* Recursively goes through all files in current directory
+to find if input file exists */
+void listFiles(const char *dirname)
 {
     DIR *dir = opendir(dirname);
     if (dir == NULL)
     {
-        return 1;
+        return;
     }
 
     struct dirent *entity;
     entity = readdir(dir);
     while (entity != NULL)
     {
-        printf("%s\n", entity->d_name);
+        printf("%hhd %s\n", entity->d_type, entity->d_name);
+        if (entity->d_type == DT_DIR && strcmp(entity->d_name,".") != 0 && strcmp(entity->d_name,"..") != 0) {
+            char path[100] = {0};
+            strcat(path,dirname);
+            strcat(path,"/");
+            strcat(path, entity->d_name);
+            listFiles(path);
+        }
         entity = readdir(dir);
     }
+    
+    
     closedir(dir);
-    return 0;
 }
+
 
 /* Will index all the files recursively of the filelist that is provided to the function */
 // find file in directory

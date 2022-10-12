@@ -5,7 +5,12 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include "trove.h"
+/*Builds new trovefile/index from the given filelist
+This will replace any existing trovefile with the same name (??)
 
+Creates trovefile
+Overwrites existing trovefile of same name
+*/
 void create_trovefile()
 {
     /* TODO: need to check if we are looking at input trovefile or /tmp/trove */

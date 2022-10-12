@@ -61,8 +61,8 @@ void update_trovefile() {
 int main(int argc, char *argv[])
 
 {
-    find_file(argc,argv);
-    // hash_table();
+    // find_file(argc,argv);
+    
     // create_trovefile();
     // search_word(argv[1]);
 
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     // Define variables to hold command line arguments
     int opt;
     char *trovefile_name = NULL;
-    // int length;
+    int length;
     int option_type;
 
     // ^ PROB CHANGE THIS NAME LATER
@@ -116,7 +116,8 @@ int main(int argc, char *argv[])
             break;
         case 'l':
             printf("u typed l\n");
-            // length = atoi(&optarg);
+            length = atoi(optarg);
+            printf("l %i\n",length);
             break;
         }
         

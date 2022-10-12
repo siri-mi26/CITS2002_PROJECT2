@@ -6,8 +6,8 @@
 #include <unistd.h>
 #include "trove.h"
 
-
-void search_word(char word[]) {
+//   [-f trovefile]  [-b  |  -r  |  -u]  [-l length]  filelist
+void commandoptionchecker(char word[]) {
     
-    printf("%s\n",word);
+    printf("commandoptionchecker running\n");
 }

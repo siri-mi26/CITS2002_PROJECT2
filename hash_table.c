@@ -22,9 +22,9 @@ void display_table(struct line ar[], int size) {
     size  = TABLE_SIZE;
     printf("value\tkey\n");
     
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < TABLE_SIZE; i++)
     {
-        printf("%d\t%d\n",ar[i].value,ar[i].key);
+        printf("%d\t%d\n",ar[i].key,ar[i].value);
     }
     
 }
