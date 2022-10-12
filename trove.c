@@ -61,8 +61,8 @@ void update_trovefile() {
 int main(int argc, char *argv[])
 
 {
-    // build_trovefile();
-    create_trovefile();
+    hash_table();
+    // create_trovefile();
     // search_word(argv[1]);
 
     // index_file();

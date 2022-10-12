@@ -9,5 +9,5 @@ void find_word();
 
 void search_word(char word[]);
 bool find_file();
-int build_trovefile();
+int hash_table();
 void create_trovefile();
