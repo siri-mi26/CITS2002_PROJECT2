@@ -19,6 +19,7 @@ It can be used to:
 #include <stdbool.h>
 #include <unistd.h>
 #include "trove.h"
+#include <getopt.h>
 
 // Add the command line argument options:
 #define OPTLIST                 "f:brul:"
@@ -71,15 +72,17 @@ void build_trovefile()
 
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
+
 {
     // search_word(argv[1]);
-    int getopt(int argc, char *const argv[], const char *optstring);
+    int getopt();
     // index_file();
     // Define variables to hold command line arguments
     int opt;
     char *trovefile_name = NULL;
     // int length;
-    int option_type = 0;
+    int option_type;
+    
     
     
     // ^ PROB CHANGE THIS NAME LATER
@@ -93,7 +96,7 @@ int main(int argc, char *argv[])
 
             case 'f':
                 printf("u typed f\n");
-                trovefile_name = strdup(optarg);
+                trovefile_name = optarg;
                 printf("f option: %s\n", trovefile_name);
                 break;
             case 'b':
@@ -113,6 +116,7 @@ int main(int argc, char *argv[])
                 // length = atoi(&optarg);
                 break;
         }
+        build_trovefile(option_type);
     }
     
     /* When extra arguments are passed */
