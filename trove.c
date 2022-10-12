@@ -18,12 +18,13 @@ It can be used to:
 #include <ctype.h>
 #include <stdbool.h>
 #include <unistd.h>
+// #include "trove.h"
 
 // Add the command line argument options:
 #define OPTLIST                 "f:brul:"
 
 
-// #include <trove.h>
+
 /* This file checks command line options to determine whether:
 -A word is being searched for (when found, the filenames containing the word will be returned)
 OR
@@ -36,7 +37,11 @@ void commandline_checker()
     if "-f" provided:
     if "-l" provided:
     if "-r" provided:
-    if "-u" provided:    
+    if "-u" provided:  
+
+    if b,r,u provided, assume arguments will be filelist
+    else it's a word
+
     if "word" provided:
     if "filelist" provided:
 
@@ -76,55 +81,63 @@ void search_trovefile()
 //{
 //}
 
+// void index_file() {
+    
+// }
+
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
 {
+     int getopt(int argc, char *const argv[], const char *optstring);
+    // index_file();
     // Define variables to hold command line arguments
     int opt;
     char *trovefile_name = NULL;
-    int length;
-    int option_type = 0;
+    // int length;
+    // int option_type = 0;
+    
     // ^ PROB CHANGE THIS NAME LATER
 
     // Go through command line arguments
     while ((opt = getopt(argc, argv, OPTLIST)) != -1) {
+        
         switch(opt)
         {
-            case 'f':
+            case '-f':
                 printf("u typed f\n");
                 trovefile_name = strdup(optarg);
                 printf("f option: %s\n", trovefile_name);
                 break;
-            case 'b':
+            case '-b':
                 printf("u typed b\n");
                 option_type = 1;
                 break;
-            case 'r':
+            case '-r':
                 printf("u typed r\n");
                 option_type = 2;
                 break;
-            case 'u':
+            case '-u':
                 printf("u typed u\n");
                 option_type = 3;
                 break;
-            case 'l':
+            case '-l':
                 printf("u typed l\n");
-                length = atoi(optarg);
+                // length = atoi(&optarg);
                 break;
         }
     }
     
     // When extra arguments are passed
-    for(; optind < argc; optind++) {
-        printf("Unknown argument given: %s\n", argv[optind]);
-    }
+    // for(; optind < argc; optind++) {
+    //     printf("Unknown argument given: %s\n", argv[optind]);
+    // }
 
 
         
 
     /*
     commandline_checker();
-    find_trovefile();
+    get_trovefile();
     build_trovefile();
     search_trovefile();
     index_file();
