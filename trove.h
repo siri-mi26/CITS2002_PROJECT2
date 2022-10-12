@@ -10,3 +10,4 @@ void find_word();
 void search_word(char word[]);
 bool find_file();
 int build_trovefile();
+void create_trovefile();
