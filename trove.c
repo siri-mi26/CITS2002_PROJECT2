@@ -49,12 +49,7 @@ void commandline_checker()
 void get_trovefile()
 {
 }
-/*Builds new trovefile/index from the given filelist
-This will replace any existing trovefile with the same name
-*/
-void build_trovefile()
-{
-}
+
 
 void remove_trovefile() {
 
@@ -66,8 +61,9 @@ void update_trovefile() {
 int main(int argc, char *argv[])
 
 {
+    build_trovefile();
     // search_word(argv[1]);
-    int getopt();
+
     // index_file();
     // Define variables to hold command line arguments
     int opt;
@@ -81,7 +77,7 @@ int main(int argc, char *argv[])
     while ((opt = getopt(argc, argv, OPTLIST)) != -1)
     {
 
-        printf("%i\n", opt);
+        
         switch (opt)
         {
 
@@ -94,7 +90,7 @@ int main(int argc, char *argv[])
             if (argc == 4) {
                 //could be filelist or word
                 //check if word or filelist func();
-                find_file(argv[3]);
+                search_word(argv[3]);
 
                 //if file exists, index_file();
                 //if no file exists, search_word();
@@ -104,7 +100,7 @@ int main(int argc, char *argv[])
         case 'b':
             printf("u typed b\n");
             option_type = 1;
-            build_trovefile(option_type);
+            update_trovefile(option_type);
             break;
         case 'r':
             printf("u typed r\n");
@@ -133,7 +129,7 @@ int main(int argc, char *argv[])
     commandline_checker();
     get_trovefile();
     build_trovefile();
-    search_trovefile();
+    
     index_file();
     */
 
