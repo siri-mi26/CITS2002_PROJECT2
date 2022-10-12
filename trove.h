@@ -6,3 +6,5 @@ void build_trovefile();
 void search_trovefile();
 void index_file();
 void find_word();
+
+void search_word(char word[]);

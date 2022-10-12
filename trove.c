@@ -18,7 +18,7 @@ It can be used to:
 #include <ctype.h>
 #include <stdbool.h>
 #include <unistd.h>
-// #include "trove.h"
+#include "trove.h"
 
 // Add the command line argument options:
 #define OPTLIST                 "f:brul:"
@@ -58,25 +58,9 @@ This will replace any existing trovefile with the same name
 void build_trovefile()
 {
 }
-/* Searches through trovefile to find all files whose contents contain the provided word
-These filenames are all printed (each filename will be printed only once)  */
-void search_trovefile()
-{
-    /* 
-    If trovefile provided:
-        
-        For each line in trovefile (doesn't have to be a text file)
-        Print absolute pathname of word
-
-    Else if trovefile not given do:
-        get_trovefile();
-        index_file(filelist);
-        search_trovefile(trovefile); //Filenames should print
 
 
-     */
-}
-/*Will index all the files recursively of the filelist that is provided to function */
+/* Will index all the files recursively of the filelist that is provided to function */
 //void index_file(filelist)
 //{
 //}
@@ -88,13 +72,14 @@ void search_trovefile()
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
 {
-     int getopt(int argc, char *const argv[], const char *optstring);
+    search_word(argv[1]);
+    int getopt(int argc, char *const argv[], const char *optstring);
     // index_file();
     // Define variables to hold command line arguments
     int opt;
     char *trovefile_name = NULL;
     // int length;
-    // int option_type = 0;
+    int option_type;
     
     // ^ PROB CHANGE THIS NAME LATER
 
@@ -127,10 +112,10 @@ int main(int argc, char *argv[])
         }
     }
     
-    // When extra arguments are passed
-    // for(; optind < argc; optind++) {
-    //     printf("Unknown argument given: %s\n", argv[optind]);
-    // }
+    /* When extra arguments are passed */
+    for(; optind < argc; optind++) {
+        printf("Unknown argument given: %s\n", argv[optind]);
+    }
 
 
         
