@@ -8,6 +8,9 @@ void index_file();
 void find_word();
 
 void search_word(char word[]);
-bool find_file();
+
+// DONE
 int hash_table();
 void create_trovefile();
+
+int find_file(int argc, char* argv[]);

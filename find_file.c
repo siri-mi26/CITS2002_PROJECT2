@@ -4,21 +4,35 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <dirent.h>
 #include "trove.h"
 
-/* Will index all the files recursively of the filelist that is provided to function */
-bool find_file(char *filename[]) {
-    //find filename in trovefile
-    
+int listFiles(const char *dirname)
+{
+    DIR *dir = opendir(dirname);
+    if (dir == NULL)
+    {
+        return 1;
+    }
 
-    //find file in directory
-    //if no exist, return false
-    //must be word
-    //call search_word();
-
-    printf("find_file is working\n");
-    return true;
+    struct dirent *entity;
+    entity = readdir(dir);
+    while (entity != NULL)
+    {
+        printf("%s\n", entity->d_name);
+        entity = readdir(dir);
+    }
+    closedir(dir);
+    return 0;
 }
 
-
-
+/* Will index all the files recursively of the filelist that is provided to the function */
+// find file in directory
+// if no exist, return false
+// must be word
+// call search_word();
+int find_file(int argc, char *argv[])
+{
+    listFiles(".");
+    return 0;
+}

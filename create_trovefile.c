@@ -8,8 +8,9 @@
 
 void create_trovefile()
 {
+    /* TODO: need to check if we are looking at input trovefile or /tmp/trove */
     FILE *fp;
-    // fp = fopen("/tmp/trove/trovefile.txt", "w+");
+    
     /* NOTE: File gets overwritten every time it's opened 
     so if issues occur, try changing the mode (w+) */
 
@@ -20,6 +21,7 @@ void create_trovefile()
 
     */
     // fp = fopen("/tmp/trove", "w+");
+
     fp = fopen("trovefile.txt", "w+");
     // if(fp == NULL) {
     //     perror("Error opening file");
