@@ -22,14 +22,7 @@ void listFiles(const char *dirname)
     entity = readdir(dir);
     while (entity != NULL)
     {
-        printf("%hhd %s\n", entity->d_type, entity->d_name);
-        if (entity->d_type == DT_DIR && strcmp(entity->d_name,".") != 0 && strcmp(entity->d_name,"..") != 0) {
-            char path[100] = {0};
-            strcat(path,dirname);
-            strcat(path,"/");
-            strcat(path, entity->d_name);
-            listFiles(path);
-        }
+        printf("Filename inside directory: %s\n", entity->d_name);
         entity = readdir(dir);
     }
     
