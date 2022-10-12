@@ -1,2 +1,2 @@
 all:
-	cc -std=c11 -Wall -Werror trove.c search_word.c is_file.c -o trove
+	cc -std=c11 -Wall -Werror trove.c search_word.c find_file.c -o trove

@@ -8,4 +8,4 @@ void index_file();
 void find_word();
 
 void search_word(char word[]);
-bool is_file();
+bool find_file();

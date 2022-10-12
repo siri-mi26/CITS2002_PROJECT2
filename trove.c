@@ -94,7 +94,11 @@ int main(int argc, char *argv[])
             if (argc == 4) {
                 //could be filelist or word
                 //check if word or filelist func();
-                is_file(argv[3]);
+                find_file(argv[3]);
+
+                //if file exists, index_file();
+                //if no file exists, search_word();
+
             }
             break;
         case 'b':
