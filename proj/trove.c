@@ -193,6 +193,9 @@ int main(int argc, char *argv[])
         printf("%s\n", strings[i]);
     }
 
+    int testingsmth = search_file();
+    printf("%i\n", testingsmth);
+
 
 
     //-------------------------------------------------------------------------

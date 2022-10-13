@@ -1,6 +1,4 @@
-#include <stdlib.h>
-#include <stdlib.h>
-#include <string.h>
+#include <stdio.h>
 /* Trove header file containing required functions for all the other files */
 
 // TODO:
@@ -14,4 +12,5 @@ int find_file(char *filename);
 void search_word(char word[]);
 // DONE
 void create_trovefile();
+int search_file();
 
