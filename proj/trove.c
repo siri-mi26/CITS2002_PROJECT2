@@ -128,6 +128,37 @@ int main(int argc, char *argv[])
         
     }
 
+    FILE *file;
+    //char str[50];
+    file = fopen("pizza", "r");
+
+    if (file == NULL) {
+        printf("Couldn't open file\n");
+        //return NULL;
+    }
+    fseek(file, 0, SEEK_END);
+    int llength = ftell(file);
+
+    fseek(file, 0, SEEK_SET);
+
+    char *string = malloc(sizeof(char) * (llength + 1));
+
+    char c;
+    int i = 0;
+
+    while((c = fgetc(file)) != EOF) 
+    {
+        string[i] = c;
+        i++;
+    }
+
+    string[i] = '\0';
+    
+    fclose(file);
+
+    printf("%s\n", string);
+
+    /*
     printf("Argc: %i\n", argc);
     printf("Command Options: %i\n", cmd_opts);
 
@@ -140,6 +171,7 @@ int main(int argc, char *argv[])
         find_file(argv[i]);
         
     }
+    */
     
 
     /* When extra arguments are passed */
