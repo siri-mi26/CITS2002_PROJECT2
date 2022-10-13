@@ -12,7 +12,7 @@
 to find if input file exists */
 void listFiles(const char *dirname)
 {
-    printf(" inside\n ");
+    
     DIR *dir = opendir(dirname);
     if (dir == NULL)
     {
