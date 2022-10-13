@@ -127,6 +127,8 @@ int main(int argc, char *argv[])
         }
         
     }
+
+    //---------------------------------------------------------------------
     // Open file
     FILE *file;
     file = fopen("pizza", "r");
@@ -147,6 +149,8 @@ int main(int argc, char *argv[])
     int i = 0;
     int k = 0;
 
+    char ** strings = malloc(20 * sizeof(char*));
+    int j = 0;
     // Loop over file getting each character, and adding it to the string
     while((c = fgetc(file)) != EOF) 
     {
@@ -158,6 +162,9 @@ int main(int argc, char *argv[])
             string[i - 1] = '\0';
             if (strlen(string) != 0) {
                 printf("Word: %s\n", string);
+                strings[j] = malloc(strlen(string) * sizeof(char));
+                strcpy(strings[j], string);
+                j++;
             }
             // "Reset string"
             i = 0;
@@ -168,6 +175,10 @@ int main(int argc, char *argv[])
     }
     // Close file
     fclose(file);
+
+    for (j = 0; j < 20; j++) {
+        printf("k: %s\n", strings[j]);
+    }
 
 
 
