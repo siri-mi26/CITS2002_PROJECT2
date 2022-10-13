@@ -19,11 +19,13 @@ void listFiles(const char *dirname)
         return;
     }
 
+    printf("Reading in: %s\n", dirname);
+
     struct dirent *entity;
     entity = readdir(dir);
     while (entity != NULL)
     {
-        printf("Filename inside directory: %s\n", entity->d_name);
+        printf("%hhd  %s/%s\n",entity->d_type, dirname, entity->d_name);
         if (entity-> d_type == DT_DIR && strcmp (entity->d_name,".") != 0 && strcmp (entity->d_name,"..") != 0) {
             char path[100] = {0};
             strcat(path,dirname);
@@ -42,8 +44,8 @@ void listFiles(const char *dirname)
 // if no exist, return false
 // must be word
 // call search_word();
-int find_file(int argc, char *argv[])
+int find_file(char* filename)
 {
-    listFiles(".");
+    listFiles(filename);
     return 0;
 }

@@ -60,7 +60,7 @@ void update_trovefile() {
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
 {
-    find_file(argc,argv);
+    //find_file(argc,argv);
     
     // create_trovefile();
     // search_word(argv[1]);
@@ -136,6 +136,8 @@ int main(int argc, char *argv[])
     // These are filelist names (I think)
     for (i = (1+cmd_opts); i < (argc); ++i) {
         printf("Filelist name %i: %s\n",(i-cmd_opts), argv[i]);
+
+        find_file(argv[i]);
         
     }
     

@@ -8,7 +8,7 @@
 
 
 // IN PROGRESS
-int find_file(int argc, char* argv[]);
+int find_file(char *filename);
 void search_word(char word[]);
 // DONE
 void create_trovefile();
