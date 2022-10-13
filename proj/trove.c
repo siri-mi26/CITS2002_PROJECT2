@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
     //---------------------------------------------------------------------
     // Open file
     FILE *file;
-    file = fopen("pizza", "r");
+    file = fopen("./testdir/watermelon.txt", "r");
 
     if (file == NULL) {                             // Error checking
         printf("Couldn't open file\n");
@@ -148,41 +148,50 @@ int main(int argc, char *argv[])
     char c;
     int i = 0;
     int k = 0;
-
-    char ** strings = malloc(20 * sizeof(char*));
     int j = 0;
+    int limit = 8;
+    // Initialize array to hold strings
+    char ** strings = malloc(limit * sizeof(char*));
     // Loop over file getting each character, and adding it to the string
     while((c = fgetc(file)) != EOF) 
     {
-        string[i] = c;
-        //printf("i: %i\n", i);
+        string[i] = c;                  // Add our character to our current string word
         i++;
-        // If the character is not alpha numeric, end the word
+        // Detect non-alphanumeric character
         if (isalnum(c) == 0) {
             string[i - 1] = '\0';
             if (strlen(string) != 0) {
-                printf("Word: %s\n", string);
+                // If words reaches word limit, reallocate more memory
+                if (j == limit) {
+                    limit = limit * 2;
+                    strings = realloc(strings, limit * sizeof(char*));
+                }
                 strings[j] = malloc(strlen(string) * sizeof(char));
                 strcpy(strings[j], string);
                 j++;
             }
             // "Reset string"
-            i = 0;
-            for (k = 0; k < 10; k++) {
+            for (k = 0; k < (i + 1); k++) {
                 string[k] = '\0';
             }
+            i = 0;
         }
     }
-    // Close file
-    fclose(file);
-
-    for (j = 0; j < 20; j++) {
-        printf("k: %s\n", strings[j]);
+    // Add last word before \0, if valid
+    if (isalnum(string[0]) != 0) {
+        strings[j] = malloc(strlen(string) * sizeof(char));
+        strcpy(strings[j], string);
+    }
+    else {
+        j--;
     }
 
-
-
-
+    fclose(file);                   // Close file
+    
+    // Print words
+    for (i = 0; i < (j + 1); i++) {
+        printf("%s\n", strings[i]);
+    }
 
 
 
