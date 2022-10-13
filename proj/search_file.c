@@ -10,7 +10,7 @@ void search_file(char* filename)
 
     if (file == NULL) {                             // Error checking
         printf("Couldn't open file\n");
-        return(EXIT_FAILURE);
+        return;
     }
     // Get length (number of characters) in file
     fseek(file, 0, SEEK_END);
@@ -68,5 +68,5 @@ void search_file(char* filename)
     for (i = 0; i < (j + 1); i++) {
         printf("%s\n", strings[i]);
     }
-    return (EXIT_SUCCESS);
+    return;
 }

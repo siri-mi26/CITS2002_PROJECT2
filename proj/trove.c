@@ -127,18 +127,7 @@ int main(int argc, char *argv[])
         }
         
     }
-
-    search_file("pizza");
-    //find_file(".");
-
-
-
-    //-------------------------------------------------------------------------
-
-    /*
-    printf("Argc: %i\n", argc);
-    printf("Command Options: %i\n", cmd_opts);
-
+    
     int i;
     // Get additional command line arguments
     // These are filelist names (I think)
@@ -148,7 +137,10 @@ int main(int argc, char *argv[])
         find_file(argv[i]);
         
     }
-    */
+
+    //search_file("pizza");
+    //find_file(".");
+    
     
 
     /* When extra arguments are passed */
