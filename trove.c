@@ -60,7 +60,7 @@ void update_trovefile() {
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
 {
-    // find_file(argc,argv);
+    find_file(argc,argv);
     
     // create_trovefile();
     // search_word(argv[1]);

@@ -12,6 +12,7 @@
 to find if input file exists */
 void listFiles(const char *dirname)
 {
+    printf(" inside\n ");
     DIR *dir = opendir(dirname);
     if (dir == NULL)
     {
@@ -25,11 +26,9 @@ void listFiles(const char *dirname)
         printf("Filename inside directory: %s\n", entity->d_name);
         entity = readdir(dir);
     }
-    
-    
+
     closedir(dir);
 }
-
 
 /* Will index all the files recursively of the filelist that is provided to the function */
 // find file in directory
