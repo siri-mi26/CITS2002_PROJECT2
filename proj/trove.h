@@ -1,4 +1,6 @@
-
+#include <stdlib.h>
+#include <stdlib.h>
+#include <string.h>
 /* Trove header file containing required functions for all the other files */
 
 // TODO:

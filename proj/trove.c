@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
     //---------------------------------------------------------------------
     // Open file
     FILE *file;
-    file = fopen("./testdir/watermelon.txt", "r");
+    file = fopen("./testdir/cat bending down.PNG", "r");
 
     if (file == NULL) {                             // Error checking
         printf("Couldn't open file\n");
