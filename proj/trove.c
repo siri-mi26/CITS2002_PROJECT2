@@ -127,36 +127,55 @@ int main(int argc, char *argv[])
         }
         
     }
-
+    // Open file
     FILE *file;
-    //char str[50];
     file = fopen("pizza", "r");
 
-    if (file == NULL) {
+    if (file == NULL) {                             // Error checking
         printf("Couldn't open file\n");
-        //return NULL;
     }
+    // Get length (number of characters) in file
     fseek(file, 0, SEEK_END);
-    int llength = ftell(file);
-
+    int file_length = ftell(file);
     fseek(file, 0, SEEK_SET);
 
-    char *string = malloc(sizeof(char) * (llength + 1));
+    // Initialize string for size of length
+    char *string = malloc(sizeof(char) * (file_length + 1));
 
+    // Initialize characters/indexes
     char c;
     int i = 0;
+    int k = 0;
 
+    // Loop over file getting each character, and adding it to the string
     while((c = fgetc(file)) != EOF) 
     {
         string[i] = c;
+        //printf("i: %i\n", i);
         i++;
+        // If the character is not alpha numeric, end the word
+        if (isalnum(c) == 0) {
+            string[i - 1] = '\0';
+            if (strlen(string) != 0) {
+                printf("Word: %s\n", string);
+            }
+            // "Reset string"
+            i = 0;
+            for (k = 0; k < 10; k++) {
+                string[k] = '\0';
+            }
+        }
     }
-
-    string[i] = '\0';
-    
+    // Close file
     fclose(file);
 
-    printf("%s\n", string);
+
+
+
+
+
+
+    //-------------------------------------------------------------------------
 
     /*
     printf("Argc: %i\n", argc);
