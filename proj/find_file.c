@@ -11,8 +11,7 @@
 /* Recursively goes through all files in current directory
 to find if input file exists */
 void listFiles(const char *dirname)
-{
-    
+{    
     DIR *dir = opendir(dirname);
     if (dir == NULL)
     {
