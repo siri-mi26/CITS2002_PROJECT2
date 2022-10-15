@@ -26,13 +26,13 @@ void search_file(char* filename)
     int k = 0;
     int j = 0;
     int limit = 8;
-    //int test_limit = 2;
+    int test_limit = 2;
     // Initialize array to hold strings
     char ** strings = malloc(limit * sizeof(char*));
 
-    //char *** test = malloc(test_limit * sizeof(char**));
+    char *** test = malloc(test_limit * sizeof(char**));
 
-    //printf("%li\n", strlen(filename));
+    // Set the first value of the array to the name of the file
     strings[j] = malloc(strlen(filename) * sizeof(char));
     strcpy(strings[j], filename);
     j++;
@@ -70,6 +70,11 @@ void search_file(char* filename)
     else {
         j--;
     }
+
+    int m = 0;
+    printf("%li\n", sizeof(test));
+    //test[m] = malloc(sizeof(strings));
+    test[m] = strings;
 
     fclose(file);                   // Close file
     
