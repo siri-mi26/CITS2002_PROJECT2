@@ -73,6 +73,9 @@ int main(int argc, char *argv[])
     int option_type;
     int cmd_opts = 0;
 
+    char ***strings_list = malloc(256);
+    int str_ind = 0;
+
     // ^ PROB CHANGE THIS NAME LATER
 
     // Go through command line arguments
@@ -138,8 +141,9 @@ int main(int argc, char *argv[])
         
     }
 
-    
-    search_file("pizza");
+
+    strings_list[str_ind] = search_file("pizza");
+    printf("word: %s\n", strings_list[0][1]);
     //find_file(".");
     
     

@@ -1,7 +1,7 @@
 #include "trove.h"
 
 
-void search_file(char* filename)
+char** search_file(char* filename)
 {
     //printf("%s\n", filename);
     // Open file
@@ -10,7 +10,7 @@ void search_file(char* filename)
 
     if (file == NULL) {                             // Error checking
         printf("Couldn't open file\n");
-        return;
+        exit(EXIT_FAILURE);
     }
     // Get length (number of characters) in file
     fseek(file, 0, SEEK_END);
@@ -26,11 +26,8 @@ void search_file(char* filename)
     int k = 0;
     int j = 0;
     int limit = 8;
-    int test_limit = 2;
     // Initialize array to hold strings
     char ** strings = malloc(limit * sizeof(char*));
-
-    char *** test = malloc(test_limit * sizeof(char**));
 
     // Set the first value of the array to the name of the file
     strings[j] = malloc(strlen(filename) * sizeof(char));
@@ -70,17 +67,7 @@ void search_file(char* filename)
     else {
         j--;
     }
+    fclose(file);
 
-    int m = 0;
-    printf("%li\n", sizeof(test));
-    //test[m] = malloc(sizeof(strings));
-    test[m] = strings;
-
-    fclose(file);                   // Close file
-    
-    // Print words
-    for (i = 0; i < (j + 1); i++) {
-        printf("%s\n", strings[i]);
-    }
-    return;
+    return strings;
 }
