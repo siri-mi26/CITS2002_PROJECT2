@@ -69,11 +69,11 @@ int main(int argc, char *argv[])
     // Define variables to hold command line arguments
     int opt;
     char *trovefile_name = NULL;
-    int length;
+    int length = 4;
     int option_type;
     int cmd_opts = 0;
 
-    char ***strings_list = malloc(256);
+    char ***strings_list = malloc(8);
     int str_ind = 0;
 
     // ^ PROB CHANGE THIS NAME LATER
@@ -141,9 +141,10 @@ int main(int argc, char *argv[])
         
     }
 
-
-    strings_list[str_ind] = search_file("pizza");
-    printf("word: %s\n", strings_list[0][1]);
+    // The search_file function should prob go in the find_file function, as it's saerching through
+    strings_list[str_ind] = search_file("pizza", length);
+    str_ind++;
+    printf("word: %s\n", strings_list[0][3]);
     //find_file(".");
     
     

@@ -15,4 +15,4 @@ int find_file(char *filename);
 void search_word(char word[]);
 // DONE
 void create_trovefile();
-char** search_file(char *filename);
+char** search_file(char *filename, int length);

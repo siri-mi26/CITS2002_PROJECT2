@@ -1,7 +1,7 @@
 #include "trove.h"
 
 
-char** search_file(char* filename)
+char** search_file(char* filename, int length)
 {
     //printf("%s\n", filename);
     // Open file
@@ -42,7 +42,7 @@ char** search_file(char* filename)
         // Detect non-alphanumeric character
         if (isalnum(c) == 0) {
             string[i - 1] = '\0';
-            if (strlen(string) != 0) {
+            if (strlen(string) != 0 && strlen(string) >= length) {
                 // If words reaches word limit, reallocate more memory
                 if (j == limit) {
                     limit = limit * 2;
@@ -60,7 +60,7 @@ char** search_file(char* filename)
         }
     }
     // Add last word before \0, if valid
-    if (isalnum(string[0]) != 0) {
+    if (isalnum(string[0]) != 0 && length <= 1) {
         strings[j] = malloc(strlen(string) * sizeof(char));
         strcpy(strings[j], string);
     }
@@ -68,6 +68,10 @@ char** search_file(char* filename)
         j--;
     }
     fclose(file);
+
+    for (i = 0; i < (j + 1); i++) {
+        printf("%s\n", strings[i]);
+    }
 
     return strings;
 }
