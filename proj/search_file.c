@@ -3,7 +3,7 @@
 
 void search_file(char* filename)
 {
-    printf("%s\n", filename);
+    //printf("%s\n", filename);
     // Open file
     FILE *file;
     file = fopen(filename, "r");
@@ -26,8 +26,17 @@ void search_file(char* filename)
     int k = 0;
     int j = 0;
     int limit = 8;
+    //int test_limit = 2;
     // Initialize array to hold strings
     char ** strings = malloc(limit * sizeof(char*));
+
+    //char *** test = malloc(test_limit * sizeof(char**));
+
+    //printf("%li\n", strlen(filename));
+    strings[j] = malloc(strlen(filename) * sizeof(char));
+    strcpy(strings[j], filename);
+    j++;
+
     // Loop over file getting each character, and adding it to the string
     while((c = fgetc(file)) != EOF) 
     {

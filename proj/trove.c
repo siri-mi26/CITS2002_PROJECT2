@@ -134,11 +134,11 @@ int main(int argc, char *argv[])
     for (i = (1+cmd_opts); i < (argc); ++i) {
         printf("Filelist name %i: %s\n",(i-cmd_opts), argv[i]);
 
-        find_file(argv[i]);
+        //find_file(argv[i]);
         
     }
 
-    //search_file("pizza");
+    search_file("pizza");
     //find_file(".");
     
     
