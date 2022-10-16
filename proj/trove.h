@@ -6,7 +6,7 @@
 
 // TODO:
 
-// void commandoption_checker();
+
 // void index_file();
 
 
@@ -16,3 +16,6 @@ void search_word(char word[]);
 // DONE
 void create_trovefile();
 char** search_file(char *filename, int length);
+void build_trovefile(int length);
+void remove_trovefile();
+void update_trovefile();

@@ -51,12 +51,10 @@ void get_trovefile()
 }
 
 
-void remove_trovefile() {
 
-}
-void update_trovefile() {
 
-}
+
+
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
 {
@@ -81,11 +79,8 @@ int main(int argc, char *argv[])
     // Go through command line arguments
     while ((opt = getopt(argc, argv, OPTLIST)) != -1)
     {
-
-        
         switch (opt)
         {
-
         case 'f':
             cmd_opts += 2;
             printf("u typed f\n");
@@ -100,14 +95,14 @@ int main(int argc, char *argv[])
 
                 //if file exists, index_file();
                 //if no file exists, search_word();
-
             }
             break;
         case 'b':
             cmd_opts += 1;
             printf("u typed b\n");
             option_type = 1;
-            update_trovefile(option_type);
+            printf("option_type %i\n", option_type);
+            build_trovefile(5);
             break;
         case 'r':
             cmd_opts += 1;
@@ -128,27 +123,23 @@ int main(int argc, char *argv[])
             printf("l %i\n",length);
             break;
         }
-        
     }
     
-    int i;
+    // TODO: how do we do multiple command line arguments 
     // Get additional command line arguments
     // These are filelist names (I think)
-    for (i = (1+cmd_opts); i < (argc); ++i) {
-        printf("Filelist name %i: %s\n",(i-cmd_opts), argv[i]);
-
+    // TODO: can we make filelist a variable to be inputted into other functions?
+    for (int i = (1 + cmd_opts); i < (argc); ++i) {
+        printf("Filelist name %i: %s\n",(i - cmd_opts), argv[i]);
         //find_file(argv[i]);
-        
     }
 
-    // The search_file function should prob go in the find_file function, as it's saerching through
+    // The search_file function should prob go in the find_file function, as it's searching through
     strings_list[str_ind] = search_file("pizza", length);
     str_ind++;
     printf("word: %s\n", strings_list[0][3]);
     //find_file(".");
     
-    
-
     /* When extra arguments are passed */
     // for(; optind < argc; optind++) {
     //     printf("Unknown argument given: %s\n", argv[optind]);
