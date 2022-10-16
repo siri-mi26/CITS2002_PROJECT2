@@ -129,6 +129,7 @@ int main(int argc, char *argv[])
     // Get additional command line arguments
     // These are filelist names (I think)
     // TODO: can we make filelist a variable to be inputted into other functions?
+    // TODO: usage function?
     for (int i = (1 + cmd_opts); i < (argc); ++i) {
         printf("Filelist name %i: %s\n",(i - cmd_opts), argv[i]);
         //find_file(argv[i]);

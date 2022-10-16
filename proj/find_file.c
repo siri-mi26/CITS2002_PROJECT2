@@ -10,7 +10,7 @@
 #define DT_DIR 4
 /* Recursively goes through all files in current directory
 to find if input file exists */
-void listFiles(const char *dirname)
+void list_file(const char *dirname)
 {    
     DIR *dir = opendir(dirname);
     if (dir == NULL)
@@ -30,7 +30,7 @@ void listFiles(const char *dirname)
             strcat(path,dirname);
             strcat(path,"/");
             strcat(path,entity->d_name);
-            listFiles(path);
+            list_file(path);
         }
         entity = readdir(dir);
     }
@@ -45,6 +45,6 @@ void listFiles(const char *dirname)
 // call search_word();
 int find_file(char* filename)
 {
-    listFiles(filename);
+    list_file(filename);
     return 0;
 }
