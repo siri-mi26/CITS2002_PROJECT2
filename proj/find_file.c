@@ -38,7 +38,7 @@ void list_file(const char *dirname)
     closedir(dir);
 }
 
-/* Will index all the files recursively of the filelist that is provided to the function */
+/* Will index all the files recursively of the file that is provided to the function */
 // find file in directory
 // if no exist, return false
 // must be word

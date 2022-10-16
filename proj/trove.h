@@ -12,10 +12,12 @@
 
 // IN PROGRESS
 int find_file(char *filename);
+void build_trovefile(char **filename, char **filelist);
+
+void remove_trovefile();
+void update_trovefile();
 
 // DONE
 void create_trovefile();
 char** search_word(char *filename, int length);
-void build_trovefile(char *trovefile_name, int length);
-void remove_trovefile();
-void update_trovefile();
+// void make_filelist(int cmd_opts, int argc, int filelist_num, char **filelist, char *argv[]);

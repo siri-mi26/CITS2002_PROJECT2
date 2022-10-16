@@ -9,18 +9,16 @@ This function creates a new trovefile given a filelist
 @filelist
 
 @length is temporary!!
+// TODO: write full_index to trovefile/creates trovefile initially
  */
-void build_trovefile(char *trovefile_name, int length) {
-    printf("build_trovefile\n");
-
+void build_trovefile(char **filename, char **filelist) {
+    printf("build_trovefile\n");    
     
+//    find_file()
+//for each file 
+    // search_file()
+        // returns strings
     
-    
-        // for x in filelist
-            // index x
-            // search file
-            // append to trovefile
-        
     
 
 }
