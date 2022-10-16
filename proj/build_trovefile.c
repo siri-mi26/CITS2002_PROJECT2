@@ -10,12 +10,12 @@ This function creates a new trovefile given a filelist
 
 @length is temporary!!
  */
-void build_trovefile(int length) {
+void build_trovefile(char *trovefile_name, int length) {
     printf("build_trovefile\n");
 
     
-    // if trovefile given
-    // else trovefile is /tmp/trove
+    
+    
         // for x in filelist
             // index x
             // search file

@@ -61,13 +61,15 @@ int main(int argc, char *argv[])
     // index_file();
     // Define variables to hold command line arguments
     int opt;
-    char *trovefile_name = NULL;
+    char *trovefile_name = "/tmp/trove";
+    // char *trovefile_name = NULL;
     int length = 4;
     int option_type;
     int cmd_opts = 0;
 
     char ***strings_list = malloc(8);
     int str_ind = 0;
+    
 
     // ^ PROB CHANGE THIS NAME LATER
     
@@ -81,7 +83,7 @@ int main(int argc, char *argv[])
             cmd_opts += 2;
             printf("u typed f\n");
             trovefile_name = optarg;
-            printf("f option: %s\n", trovefile_name);
+            printf("file given with f option: %s\n", trovefile_name);
             
             // if -f and word: It searches for word, reading from the trove-file.
             if (argc == 4) {
@@ -98,7 +100,7 @@ int main(int argc, char *argv[])
             printf("u typed b\n");
             option_type = 1;
             printf("option_type %i\n", option_type);
-            build_trovefile(5);
+            build_trovefile(trovefile_name, 5);
             // l is inside search_word()
             break;
         case 'r':
