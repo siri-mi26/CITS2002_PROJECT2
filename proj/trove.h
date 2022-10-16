@@ -12,10 +12,10 @@
 
 // IN PROGRESS
 int find_file(char *filename);
-void search_word(char word[]);
+
 // DONE
 void create_trovefile();
-char** search_file(char *filename, int length);
+char** search_word(char *filename, int length);
 void build_trovefile(int length);
 void remove_trovefile();
 void update_trovefile();

@@ -15,10 +15,12 @@ void build_trovefile(int length) {
 
     
     // if trovefile given
+    // else trovefile is /tmp/trove
         // for x in filelist
             // index x
             // search file
             // append to trovefile
+        
     
 
 }

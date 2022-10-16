@@ -50,11 +50,6 @@ void get_trovefile()
 {
 }
 
-
-
-
-
-
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
 {
@@ -75,8 +70,9 @@ int main(int argc, char *argv[])
     int str_ind = 0;
 
     // ^ PROB CHANGE THIS NAME LATER
-
+    
     // Go through command line arguments
+    /* -b,r,u = prompt2 */
     while ((opt = getopt(argc, argv, OPTLIST)) != -1)
     {
         switch (opt)
@@ -91,7 +87,7 @@ int main(int argc, char *argv[])
             if (argc == 4) {
                 //could be filelist or word
                 //check if word or filelist func();
-                search_word(argv[3]);
+                search_word(argv[3], length);
 
                 //if file exists, index_file();
                 //if no file exists, search_word();
@@ -103,6 +99,7 @@ int main(int argc, char *argv[])
             option_type = 1;
             printf("option_type %i\n", option_type);
             build_trovefile(5);
+            // l is inside search_word()
             break;
         case 'r':
             cmd_opts += 1;
@@ -128,17 +125,19 @@ int main(int argc, char *argv[])
     // TODO: how do we do multiple command line arguments 
     // Get additional command line arguments
     // These are filelist names (I think)
-    // TODO: can we make filelist a variable to be inputted into other functions?
+    
     // TODO: usage function?
     for (int i = (1 + cmd_opts); i < (argc); ++i) {
         printf("Filelist name %i: %s\n",(i - cmd_opts), argv[i]);
+        // TODO: make fiellist into variable here
         //find_file(argv[i]);
     }
 
     // The search_file function should prob go in the find_file function, as it's searching through
-    strings_list[str_ind] = search_file("pizza", length);
+    strings_list[str_ind] = search_word("pizza", length);
     str_ind++;
     printf("word: %s\n", strings_list[0][3]);
+    
     //find_file(".");
     
     /* When extra arguments are passed */
