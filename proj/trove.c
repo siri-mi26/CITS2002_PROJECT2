@@ -43,6 +43,13 @@ void make_filelist(int cmd_opts, int argc, int filelist_num, char **filelist, ch
         printf("filelist[i] %s\n", filelist[i - cmd_opts - 1]);
     }
 }
+
+int commandline_error(char *argument) {
+    printf("Error: Additional argument in command line: '%s'\n", argument);
+    exit(EXIT_FAILURE);
+}
+
+
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
 {
@@ -102,6 +109,9 @@ int main(int argc, char *argv[])
             }
             break;
         case 'b':
+            if (option_type != 0) {
+                commandline_error("-b");
+            }
             cmd_opts += 1;
             printf("u typed b\n");
             option_type = 1;
@@ -112,12 +122,18 @@ int main(int argc, char *argv[])
             // l is inside search_word()
             break;
         case 'r':
+            if (option_type != 0) {
+                commandline_error("-r");
+            }
             cmd_opts += 1;
             printf("u typed r\n");
             option_type = 2;
             remove_trovefile();
             break;
         case 'u':
+            if (option_type != 0) {
+                commandline_error("-u");
+            }
             cmd_opts += 1;
             printf("u typed u\n");
             option_type = 3;
@@ -132,10 +148,6 @@ int main(int argc, char *argv[])
         }
     }
     // TODO: if option_type == etc
-
-
-
-
 
 
     // TODO: how do we do multiple command line arguments
