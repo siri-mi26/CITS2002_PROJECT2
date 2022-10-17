@@ -11,6 +11,10 @@
 #define DT_REG 8
 /* Recursively goes through all files in current directory
 to find if input file exists */
+
+// Initialize strings_list to store all list of words
+char ***strings_list;
+int str_ind = 0;
 void list_file(const char *dirname)
 {    
     DIR *dir = opendir(dirname);
@@ -39,14 +43,18 @@ void list_file(const char *dirname)
             // strcat(path,entity->d_name);
             list_file(path);
         }
-        // If a file that can be read, read it
+        // // If a file that can be read, read it
         if (entity-> d_type == DT_REG) {
-            search_word(path, 4);
+            strings_list[str_ind] = search_word(path, 4);
+            //search_word(path, 4);
+            str_ind++;
         }
         entity = readdir(dir);
     }
 
     closedir(dir);
+
+    printf("str_ind: %i\n", str_ind);
 }
 /* Will index all the files recursively of the file that is provided to the function */
 // find file in directory
@@ -55,6 +63,13 @@ void list_file(const char *dirname)
 // call search_word();
 int find_file(char* filename)
 {
+    strings_list = malloc(sizeof(char**) * 8);
     list_file(filename);
+    printf("word: %li\n", sizeof(strings_list[3]));
+    printf("word: %s\n", strings_list[1][0]);
+    printf("word: %s\n", strings_list[2][0]);
+    printf("word: %s\n", strings_list[3][0]);
+    printf("word: %s\n", strings_list[4][0]);
+    printf("word: %s\n", strings_list[5][0]);
     return 0;
 }
