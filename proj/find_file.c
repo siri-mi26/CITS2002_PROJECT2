@@ -8,6 +8,7 @@
 #include <dirent.h>
 #include "trove.h"
 #define DT_DIR 4
+#define DT_REG 8
 /* Recursively goes through all files in current directory
 to find if input file exists */
 void list_file(const char *dirname)
@@ -25,12 +26,20 @@ void list_file(const char *dirname)
     while (entity != NULL)
     {
         printf("%hhd  %s/%s\n",entity->d_type, dirname, entity->d_name);
+        char path[100] = {0};
+        strcat(path,dirname);
+        strcat(path,"/");
+        strcat(path,entity->d_name);
         if (entity-> d_type == DT_DIR && strcmp (entity->d_name,".") != 0 && strcmp (entity->d_name,"..") != 0) {
-            char path[100] = {0};
-            strcat(path,dirname);
-            strcat(path,"/");
-            strcat(path,entity->d_name);
+            // char path[100] = {0};
+            // strcat(path,dirname);
+            // strcat(path,"/");
+            // strcat(path,entity->d_name);
             list_file(path);
+        }
+        // If a file that can be read, read it
+        if (entity-> d_type == DT_REG) {
+            search_word(path, 4);
         }
         entity = readdir(dir);
     }
