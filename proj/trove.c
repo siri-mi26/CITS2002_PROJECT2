@@ -16,7 +16,7 @@ It can be used to:
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
-#include <unistd.h>
+
 #include "trove.h"
 #include <getopt.h>
 
@@ -40,9 +40,17 @@ void make_filelist(int cmd_opts, int argc, int filelist_num, char **filelist, ch
 
         filelist[i - cmd_opts - 1] = malloc((256 + 1) * sizeof(char)); // 256 is max filename length
         strcpy(filelist[i - cmd_opts - 1], argv[i]);                   // different indices, as the for loop starts at 4, whereas this loop should start at 0 to get first element of filelist
-        printf("filelist[i] %s\n", filelist[i - cmd_opts - 1]);
+        // printf("filelist[i] %s\n", filelist[i - cmd_opts - 1]);
+        // TODO: FREE FILELIST ARRAY OF CHARS free()
     }
 }
+
+int commandline_error(char *argument) {
+    printf("Error: Additional argument in command line: '%s'\n", argument);
+    exit(EXIT_FAILURE);
+}
+
+
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
 {
@@ -54,10 +62,11 @@ int main(int argc, char *argv[])
     // index_file();
     // Define variables to hold command line arguments
     int opt;
-    char *trovefile_name = "/tmp/trove";
+    // const char *trovefile_name = "/tmp/trove";
+    char *trovefile_name = "trovey";
     // char *trovefile_name = NULL;
     int length = 4;
-    int option_type = 0; //b r u = 1,2,3 respectively. if 0 => prompt 1
+    int option_type = 0; // b r u = 1,2,3 respectively. if 0 => prompt 1
     int cmd_opts = 0;
 
     char ***strings_list = malloc(8);
@@ -73,15 +82,6 @@ int main(int argc, char *argv[])
     /* -b,r,u = prompt2 */
     while ((opt = getopt(argc, argv, OPTLIST)) != -1)
     {
-
-        // for (int i = (cmd_opts + 1); i < argc; i++)
-        // {
-        //     // printf("Filelist name %i: %s\n", (i - cmd_opts), argv[i]);
-        //     filelist[i - cmd_opts - 1] = malloc((256 + 1) * sizeof(char)); // 256 is max filename length
-        //     strcpy(filelist[i - cmd_opts - 1], argv[i]);                   // different indices, as the for loop starts at 4, whereas this loop should start at 0 to get first element of filelist
-        //     printf("filelist[i] %s\n", filelist[i - cmd_opts - 1]);
-        //     // find_file(argv[i]);
-        // }
         switch (opt)
         {
         case 'f':
@@ -102,24 +102,32 @@ int main(int argc, char *argv[])
             }
             break;
         case 'b':
+            if (option_type != 0) {
+                commandline_error("-b");
+            }
             cmd_opts += 1;
-            printf("u typed b\n");
             option_type = 1;
             printf("option_type %i\n", option_type);
             printf("cmd_opts %i\n", cmd_opts);
+
+
             
             // build_trovefile(trovefile_name, filelist);
             // l is inside search_word()
             break;
         case 'r':
+            if (option_type != 0) {
+                commandline_error("-r");
+            }
             cmd_opts += 1;
-            printf("u typed r\n");
             option_type = 2;
             remove_trovefile();
             break;
         case 'u':
+            if (option_type != 0) {
+                commandline_error("-u");
+            }
             cmd_opts += 1;
-            printf("u typed u\n");
             option_type = 3;
             update_trovefile();
             break;
@@ -134,32 +142,49 @@ int main(int argc, char *argv[])
     // TODO: if option_type == etc
 
 
-
-
-
-
     // TODO: how do we do multiple command line arguments
     // Get additional command line arguments
     // These are filelist names (I think)
 
     // TODO: usage function?
-    printf("cmd_opts %i\n", cmd_opts);
+    //printf("cmd_opts %i\n", cmd_opts);
 
-    filelist_num = argc - cmd_opts - 1; //cmdopts = 4
+    filelist_num = argc - cmd_opts - 1; // cmdopts = 4
     filelist = malloc(filelist_num * sizeof(char *));
     make_filelist(cmd_opts, argc, filelist_num, filelist, argv);
     for (int i = (cmd_opts + 1); i < argc; i++)
     {
+        // printf("Filelist name %i: %s\n", (i - cmd_opts), argv[i]);
+        
+    }
+    // TODO: if option_type == etc
+    // call functions for b r u
+    if (option_type == 1) //b
+    {
+        for (int i = 0; i < filelist_num; i++)
+        {
+            // printf("filelist[i] %s\n", filelist[i]);
+            build_trovefile(filelist[i], filelist, length);
+        }
+        
+        
+
         printf("Filelist name %i: %s\n", (i - cmd_opts), argv[i]);
+        find_file(argv[i]);
+
         // filelist[i - cmd_opts - 1] = malloc((256 + 1) * sizeof(char)); // 256 is max filename length
         // strcpy(filelist[i - cmd_opts - 1], argv[i]);                   // different indices, as the for loop starts at 4, whereas this loop should start at 0 to get first element of filelist
         // printf("filelist[i] %s\n", filelist[i - cmd_opts - 1]);
     }
 
+    
+
     // The search_file function should prob go in the find_file function, as it's searching through
-    strings_list[str_ind] = search_word("pizza", length);
+    printf("FOR NOW, IGNORE PAST THIS PART:\n");
+    strings_list[str_ind] = search_word("./testdir/watermelon.txt", length);
     str_ind++;
-    printf("word: %s\n", strings_list[0][3]);
+    // printf("word: %s\n", strings_list[0][3]);
+    //printf("word: %s\n", strings_list[0][0]);
 
     // find_file(".");
 
