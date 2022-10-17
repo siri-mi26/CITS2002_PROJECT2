@@ -79,10 +79,11 @@ char** search_word(char* filename, int length)
         j--;
     }
     fclose(file);
-
+     
     for (i = 0; i < (j + 1); i++) {
         printf("%s\n", strings[i]);
     }
+    
 
     return strings;
 }
