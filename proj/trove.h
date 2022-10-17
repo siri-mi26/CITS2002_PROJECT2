@@ -7,7 +7,7 @@
 
 // TODO:
 // IN PROGRESS
-int find_file(char *filename, int length);
+int find_file(char *filename);
 void build_trovefile(char *filename, char **filelist, int length);
 
 void remove_trovefile();

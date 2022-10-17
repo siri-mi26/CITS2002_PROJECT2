@@ -1,12 +1,8 @@
 #include "trove.h"
 /* 
 TODO: change comment from "returned" to ?? after its done (mebe)
-
-
 This function searches a given filename and returns all the words (once per word)
 If length parameter is supplied, only words less than or equal to that length will be returned
-
-
 @filename 
 @length 
  */
@@ -16,7 +12,6 @@ char** search_word(char* filename, int length)
     // Open file
     FILE *file;
     file = fopen(filename, "r");
-
     if (file == NULL) {                             // Error checking
         printf("Couldn't open file\n");
         exit(EXIT_FAILURE);
@@ -25,11 +20,9 @@ char** search_word(char* filename, int length)
     fseek(file, 0, SEEK_END);
     int file_length = ftell(file);
     fseek(file, 0, SEEK_SET);
-
     // Initialize string for size of length
     char *string = malloc(sizeof(char) * (file_length + 1));
     //char *string = malloc(strlen(file_length) + 1);
-
     // Initialize characters/indexes
     char c;
     int i = 0;
@@ -39,12 +32,10 @@ char** search_word(char* filename, int length)
     // Initialize array to hold strings
     char ** strings = malloc(limit * sizeof(char*));
     //char ** strings = malloc(limit);
-
     // Set the first value of the array to the name of the file
     strings[j] = malloc(strlen(filename) * sizeof(char) + 1);
     strcpy(strings[j], filename);
     j++;
-
     // Loop over file getting each character, and adding it to the string
     while((c = fgetc(file)) != EOF) 
     {
@@ -79,11 +70,12 @@ char** search_word(char* filename, int length)
         j--;
     }
     fclose(file);
+
      
     for (i = 0; i < (j + 1); i++) {
         printf("%s\n", strings[i]);
     }
-    
+
 
     return strings;
 }

@@ -17,7 +17,7 @@ void build_trovefile(char *filename, char **filelist, int length)
     
     
     
-    find_file(filename, length);
+    find_file(filename);
 
     // find_file(filename);
 
