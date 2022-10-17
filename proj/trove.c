@@ -55,8 +55,6 @@ int main(int argc, char *argv[])
     int length = 4;
     int option_type = 0; //b r u = 1,2,3 respectively. if 0 => prompt 1
     int cmd_opts = 0;
-    char ***strings_list = malloc(8);
-    int str_ind = 0;
     int filelist_num = 0;
     char **filelist;
     // char filelist[20][256+1]; //256 because that is max length of filename
@@ -153,13 +151,6 @@ int main(int argc, char *argv[])
         // printf("filelist[i] %s\n", filelist[i - cmd_opts - 1]);
     }
 
-
-
-    // The search_file function should prob go in the find_file function, as it's searching through
-    printf("FOR NOW, IGNORE PAST THIS PART:\n");
-    strings_list[str_ind] = search_word("./testdir/watermelon.txt", length);
-    str_ind++;
-    printf("word: %s\n", strings_list[0][0]);
 
     // TODO: make it into file
     // TODO: write it into proper file
