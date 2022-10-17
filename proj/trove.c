@@ -169,9 +169,9 @@ int main(int argc, char *argv[])
     }
 
     // The search_file function should prob go in the find_file function, as it's searching through
-    strings_list[str_ind] = search_word("pizza", length);
+    strings_list[str_ind] = search_word("./testdir/watermelon.txt", length);
     str_ind++;
-    printf("word: %s\n", strings_list[0][3]);
+    printf("word: %s\n", strings_list[0][0]);
 
     // find_file(".");
 

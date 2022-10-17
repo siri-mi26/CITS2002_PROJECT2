@@ -28,18 +28,20 @@ char** search_word(char* filename, int length)
 
     // Initialize string for size of length
     char *string = malloc(sizeof(char) * (file_length + 1));
+    //char *string = malloc(strlen(file_length) + 1);
 
     // Initialize characters/indexes
     char c;
     int i = 0;
     int k = 0;
     int j = 0;
-    int limit = 8;
+    int limit = 128;
     // Initialize array to hold strings
     char ** strings = malloc(limit * sizeof(char*));
+    //char ** strings = malloc(limit);
 
     // Set the first value of the array to the name of the file
-    strings[j] = malloc(strlen(filename) * sizeof(char));
+    strings[j] = malloc(strlen(filename) * sizeof(char) + 1);
     strcpy(strings[j], filename);
     j++;
 
@@ -57,7 +59,7 @@ char** search_word(char* filename, int length)
                     limit = limit * 2;
                     strings = realloc(strings, limit * sizeof(char*));
                 }
-                strings[j] = malloc(strlen(string) * sizeof(char));
+                strings[j] = malloc(strlen(string) * sizeof(char) + 1);
                 strcpy(strings[j], string);
                 j++;
             }
