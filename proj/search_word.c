@@ -33,8 +33,9 @@ char** search_word(char* filename, int length)
     char ** strings = malloc(limit * sizeof(char*));
     //char ** strings = malloc(limit);
     // Set the first value of the array to the name of the file
-    strings[j] = malloc(strlen(filename) * sizeof(char) + 1);
-    strcpy(strings[j], filename);
+    char *full_pathname = realpath(filename, NULL);
+    strings[j] = malloc(strlen(full_pathname) * sizeof(char) + 1);
+    strcpy(strings[j], full_pathname);
     j++;
     // Loop over file getting each character, and adding it to the string
     while((c = fgetc(file)) != EOF) 

@@ -17,6 +17,7 @@ It can be used to:
 #include <unistd.h>
 #include "trove.h"
 #include <getopt.h>
+// char *realpath(const char *__restrict__file_name, char *__restrict__resolved_name);
 // Add the command line argument options:
 #define OPTLIST "f:brul:"
 /* This file checks command line options to determine whether:
@@ -137,6 +138,10 @@ int main(int argc, char *argv[])
     // TODO: usage function?
     printf("cmd_opts %i\n", cmd_opts);
     //printf("cmd_opts %i\n", cmd_opts);
+
+    char * test;
+    test = realpath(".", NULL);
+    printf("realpath: %s\n", test);
 
     filelist_num = argc - cmd_opts - 1; //cmdopts = 4
     filelist = malloc(filelist_num * sizeof(char *));
