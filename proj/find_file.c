@@ -41,7 +41,7 @@ void list_file(char *dirname)
         strings_list[str_ind] = search_word(dirname, 4);
         printf("[str_ind]  %i\n", str_ind);
         // search_word(path, 4);
-        str_ind++;
+        // str_ind++;
         if (str_ind == array_size)
         {
             array_size *= 2;
@@ -89,8 +89,7 @@ void list_file(char *dirname)
             str_ind++;
             if (str_ind == array_size)
             {
-                array_size *= 2;
-                
+                array_size *= 2;                
                 strings_list = realloc(strings_list, array_size);
                 
             }
@@ -114,8 +113,12 @@ int find_file(char *filename)
 
     int i;
     int j;
+    printf("second strind %i\n", str_ind);
     for (i = 0; i < str_ind; i++) {
+        printf("HELLO %i\n", i);
+
         for (j = 0; strings_list[i][j] != NULL; j++) {
+            printf("BYEEE\n");
             printf("i: %i   j: %i\n", i, j);
             printf("word: %s\n", strings_list[i][j]);
         }
