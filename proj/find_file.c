@@ -113,12 +113,12 @@ int find_file(char *filename)
 
     int i;
     int j;
-    printf("second strind %i\n", str_ind);
+    
     for (i = 0; i < str_ind; i++) {
-        printf("HELLO %i\n", i);
+        
 
         for (j = 0; strings_list[i][j] != NULL; j++) {
-            printf("BYEEE\n");
+            
             printf("i: %i   j: %i\n", i, j);
             printf("word: %s\n", strings_list[i][j]);
         }
@@ -127,7 +127,7 @@ int find_file(char *filename)
     // if strings
     // if strings_list
     // read strings list
-    // build_trovefile("trovey", strings_list, str_ind);
+    build_trovefile("trovey.txt", strings_list, str_ind); 
 
     free(strings_list);
     return 0;
