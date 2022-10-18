@@ -91,7 +91,7 @@ void list_file(char *dirname)
 // if no exist, return false
 // must be word
 // call search_word();
-int find_file(char **filelist)
+int find_file(char **filelist, int filelist_num)
 {
     int i;
     int j;
@@ -110,6 +110,6 @@ int find_file(char **filelist)
             printf("word: %s\n", strings_list[i][j]);
         }
     }
-
+    build_trovefile("trovey.txt", strings_list, filelist_num);
     return 0;
 }

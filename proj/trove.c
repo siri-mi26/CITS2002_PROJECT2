@@ -159,7 +159,7 @@ int main(int argc, char *argv[])
     filelist = malloc(filelist_num * sizeof(char *));
     make_filelist(cmd_opts, argc, filelist_num, filelist, argv);
     str_ind_test = 0;
-    find_file(filelist);
+    find_file(filelist, filelist_num);
     //printf("filelist: %li\n", sizeof(filelist));
     // for (int i = (cmd_opts + 1); i < argc; i++)
     // {
