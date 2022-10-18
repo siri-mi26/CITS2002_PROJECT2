@@ -94,16 +94,17 @@ int find_file(char *filename)
 
     list_file(filename);
     
-    // int i;
-    // int j;
-    // for (i = 0; i < str_ind; i++) {
-    //     for (j = 0; strings_list[i][j] != NULL; j++) {
-    //         printf("i: %i   j: %i\n", i, j);
-    //         printf("word: %s\n", strings_list[i][j]);
-    //     }
-    // }
-
-    build_trovefile("trovey", strings_list, str_ind);
+    int i;
+    int j;
+    for (i = 0; i < str_ind; i++) {
+        for (j = 0; strings_list[i][j] != NULL; j++) {
+            printf("i: %i   j: %i\n", i, j);
+            printf("word: %s\n", strings_list[i][j]);
+        }
+    }
+    // if strings
+    // if strings_list
+    // build_trovefile("trovey", strings_list, str_ind);
 
     free(strings_list);
     return 0;
