@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,14 +14,14 @@
 to find if input file exists */
 
 // Initialize strings_list to store all list of words
-// TODO: input as pathnames need to be taken in 
+// TODO: input as pathnames need to be taken in
 char ***strings_list;
 int str_ind = 0;
 int array_size = 10;
 void list_file(char *dirname)
 {
     DIR *dir = opendir(dirname); // tries to open assuming it's a directory
-    FILE *single_file;    
+    FILE *single_file;
 
     if (dir == NULL) // It could be a single file or non-existent file
     {
@@ -33,9 +32,22 @@ void list_file(char *dirname)
             // NO return statement here as one file might not be existing but others might be
         }
         // No error occurred so it can be searched
-        search_word(dirname, 4);
+        // printf("---------------------------------------THIS IS WHERE IT\'S GOING IN\n");
 
-        
+        // search_word(dirname, 4);
+
+        printf("sizeof %ld\n", sizeof(strings_list));
+        strings_list[str_ind] = search_word(dirname, 4);
+        printf("[str_ind]  %i\n", str_ind);
+        // search_word(path, 4);
+        str_ind++;
+        if (str_ind == array_size)
+        {
+            array_size *= 2;
+            strings_list = realloc(strings_list, array_size);
+        }
+        printf("sizeof %ld\n", sizeof(strings_list));
+
         return;
     }
 
@@ -69,21 +81,21 @@ void list_file(char *dirname)
         {
             printf("sizeof %ld\n", sizeof(strings_list));
             strings_list[str_ind] = search_word(path, 4);
-            printf("[str_ind]  %i\n", str_ind );
+            printf("[str_ind]  %i\n", str_ind);
             // search_word(path, 4);
             str_ind++;
-            if (str_ind == array_size) {
+            if (str_ind == array_size)
+            {
                 array_size *= 2;
-                strings_list = realloc(strings_list, array_size);                
+                strings_list = realloc(strings_list, array_size);
             }
             printf("sizeof %ld\n", sizeof(strings_list));
         }
         entity = readdir(dir);
     }
 
-
-closedir(dir);
-printf("str_ind: %i\n", str_ind);
+    closedir(dir);
+    printf("str_ind: %i\n", str_ind);
 }
 
 /* Will index all the files recursively of the file that are provided to the function.
@@ -93,17 +105,19 @@ int find_file(char *filename)
     strings_list = malloc(sizeof(char **) * array_size);
 
     list_file(filename);
-    
-    int i;
-    int j;
-    for (i = 0; i < str_ind; i++) {
-        for (j = 0; strings_list[i][j] != NULL; j++) {
-            printf("i: %i   j: %i\n", i, j);
-            printf("word: %s\n", strings_list[i][j]);
-        }
-    }
+
+    // int i;
+    // int j;
+    // for (i = 0; i < str_ind; i++) {
+    //     for (j = 0; strings_list[i][j] != NULL; j++) {
+    //         printf("i: %i   j: %i\n", i, j);
+    //         printf("word: %s\n", strings_list[i][j]);
+    //     }
+    // }
+
     // if strings
     // if strings_list
+    // read strings list
     // build_trovefile("trovey", strings_list, str_ind);
 
     free(strings_list);

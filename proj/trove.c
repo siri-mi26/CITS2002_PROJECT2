@@ -26,9 +26,7 @@ OR
 -A list of files (given as "filelist") need to be indexed
 */
 /* This file finds and gets the trovefile */
-void get_trovefile()
-{
-}
+
 void make_filelist(int cmd_opts, int argc, int filelist_num, char **filelist, char *argv[])
 {
     for (int i = (cmd_opts + 1); i < argc; i++)
@@ -43,6 +41,11 @@ int commandline_error(char *argument)
     exit(EXIT_FAILURE);
 }
 /* Invokes the necessary functions to search trovefile or modify it */
+char *trovefile_name = "/tmp/trove"; //this is outside main as it is used by get_trovefile()
+char * get_trovefile()
+{
+    return trovefile_name;   
+}
 int main(int argc, char *argv[])
 {
     // find_file(argc,argv);
@@ -51,7 +54,7 @@ int main(int argc, char *argv[])
     // index_file();
     // Define variables to hold command line arguments
     int opt;
-    char *trovefile_name = "/tmp/trove";
+    
     // char *trovefile_name = NULL;
     int length = 4;
     int option_type = 0; // b r u = 1,2,3 respectively. if 0 => prompt 1
