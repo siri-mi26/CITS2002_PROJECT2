@@ -124,11 +124,9 @@ int find_file(char *filename)
         }
     }
 
-    // if strings
-    // if strings_list
-    // read strings list
-    build_trovefile("trovey.txt", strings_list, str_ind); 
-
+ 
+    // build_trovefile("trovey.txt", strings_list, str_ind); 
+    
     free(strings_list);
     return 0;
 }

@@ -3,78 +3,52 @@
 TODO: create new function signature
 void build_trovefile(char *trovefile, char *filelist)
 
-
 This function creates a new trovefile given a filelist
 @trovefile
 @filelist
-
-@length is temporary!!
-// TODO: write full_index to trovefile/creates trovefile initially
  */
+
 void build_trovefile(char *trovefilename, char ***strings_list, int str_ind)
 {
-    printf("build_trovefile\n");
+
     FILE *fp;
     int i;
     int j;
     // trovefilename = get_trovefile();
-    printf("trovefilenametrovefilenametrovefilenametrovefilenametrovefilename %s\n", trovefilename);
 
     char pathname[100]; // TODO: change size
     char str2[100];     // the repeat
-    char str3[100];
+    char word[100];
     strcpy(pathname, "@");
 
     fp = fopen(trovefilename, "wt+");
 
     for (i = 0; i < str_ind; i++)
     {
-        // copy over filename
 
         for (j = 0; strings_list[i][j] != NULL; j++)
-        // copy over words PER filename
+
         {
-            if (strcmp(strings_list[i][0], str2) == 0)
+            if (strcmp(strings_list[i][0], str2) == 0) // Since we have many rows with the same pathname as the first item,
+            // When it encounters the same pathname again, the words are copied while the pathname remains the same
             {
-                // also add code here
-                strcpy(str3, strings_list[i][j]);
-                strcat(str3, " ");
-                printf("str3 %s\n", str3);
-                fwrite(str3, 1, strlen(str3), fp);
-                
+                strcpy(word, strings_list[i][j]);
+                strcat(word, " ");
+                printf("word %s\n", word);
+                fwrite(word, 1, strlen(word), fp);
                 continue;
             }
-
+            // str2 is basically the pathname and it's copied into str2 so it can be compared in each loop (as shown above with strcmp)
             strcpy(str2, strings_list[i][0]);
-            
+            //pathname is "@" initially. to it, we copy the pathname e.g. /home/siri/PROJECT_2/proj/goofy/valo_noob.exe
             strcat(pathname, strings_list[i][0]);
-            
-            strcat(pathname, "\n");
-            printf("pathname %s\n", pathname);
+            strcat(pathname, "\n"); //add new line
+            printf("pathname %s\n", pathname); //looks like @/home/siri/PROJECT_2/proj/goofy/valo_noob.exe
+            fwrite(pathname, 1, strlen(pathname), fp); //write to file
 
-            fwrite(pathname, 1, strlen(pathname), fp);
-
-            printf("i %i\n", i);
-            printf("j %i\n", j);
-
-            // words
-
-            printf("strings_list[%i] %s\n", i, strings_list[i][0]);
-
-            // strcat(str, strings_list[i][0]);
-
-            // printf("i: %i   j: %i\n", i, j);
-            // printf("word: %s\n", strings_list[i][j]);
-            // fwrite(strings_list[i][j], 1, sizeof(strings_list[i][j]), fp);
         }
         printf("outer loop\n");
     }
 
-    // fclose(fp);
-
-    // printf("here\n");
-
-    // for each file
-    // search_file()
-    // returns strings
+    fclose(fp);
 }

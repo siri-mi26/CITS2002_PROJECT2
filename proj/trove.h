@@ -10,7 +10,7 @@
 int find_file(char *filename);
 void build_trovefile(char *trovefilename, char ***strings_list, int str_ind);
 
-void remove_trovefile();
+void remove_trovefile(char *trovefilename, char **filelist, int filelist_num, int argc);
 void update_trovefile();
 void another_func();
 

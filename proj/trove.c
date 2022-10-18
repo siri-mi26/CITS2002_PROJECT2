@@ -41,10 +41,10 @@ int commandline_error(char *argument)
     exit(EXIT_FAILURE);
 }
 /* Invokes the necessary functions to search trovefile or modify it */
-char *trovefile_name = "/tmp/trove"; //this is outside main as it is used by get_trovefile()
-char * get_trovefile()
+char *trovefile_name = "/tmp/trove"; // this is outside main as it is used by get_trovefile()
+char *get_trovefile()
 {
-    return trovefile_name;   
+    return trovefile_name;
 }
 int main(int argc, char *argv[])
 {
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
     // index_file();
     // Define variables to hold command line arguments
     int opt;
-    
+
     // char *trovefile_name = NULL;
     int length = 4;
     int option_type = 0; // b r u = 1,2,3 respectively. if 0 => prompt 1
@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
             cmd_opts += 1;
             printf("u typed r\n");
             option_type = 2;
-            remove_trovefile();
+
             break;
         case 'u':
             if (option_type != 0)
@@ -134,31 +134,13 @@ int main(int argc, char *argv[])
         }
     }
 
-    // Get additional command line arguments
-    // These are filelist names (I think)
-
     // TODO: usage function?
 
-    // printf("cmd_opts %i\n", cmd_opts);
-
-    // TODO: if option_type == etc
-    // TODO: make it into file
-    // TODO: write it into proper file
-
-    // if (option_type == 1)
-    /*
-        for file in filelist:
-    find_file(file)
-    for openable_file in each subdirectory:
-        file_words <- search_word(file)
-        strings_list.append(file_words)
-
-    strings_file_to_disk(strings_list) */
     char *test;
     test = realpath(".", NULL);
     printf("realpath: %s\n", test);
 
-    filelist_num = argc - cmd_opts - 1; // cmdopts = 4
+    filelist_num = argc - cmd_opts - 1;
     filelist = malloc(filelist_num * sizeof(char *));
     make_filelist(cmd_opts, argc, filelist_num, filelist, argv);
     for (int i = (cmd_opts + 1); i < argc; i++)
@@ -167,9 +149,13 @@ int main(int argc, char *argv[])
         find_file(argv[i]);
     }
 
-    // if (option_type = 1) {
+    
+    if (option_type == 2)
+    {
         
-    // }
+        remove_trovefile("rm.txt", filelist, filelist_num, argc);
+        
+    }
 
     /* When extra arguments are passed */
     // for(; optind < argc; optind++) {
