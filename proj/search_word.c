@@ -8,7 +8,7 @@ If length parameter is supplied, only words less than or equal to that length wi
  */
 char** search_word(char* filename, int length)
 {
-    //printf("%s\n", filename);
+    printf("Searching in %s\n", filename);
     // Open file
     FILE *file;
     file = fopen(filename, "r");

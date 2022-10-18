@@ -13,7 +13,6 @@
 to find if input file exists */
 // Initialize strings_list to store all list of words
 char ***strings_list;
-int str_ind = 0;
 void list_file(char *dirname)
 {    
     DIR *dir = opendir(dirname);
@@ -31,41 +30,58 @@ void list_file(char *dirname)
         printf("Single file: %s\n", dirname);
         strings_list[str_ind_test] = search_word(dirname, 4);
         str_ind_test++;
-        return;
-        // char path2[100] = {0};
-        // strcat(path2, dirname);
-        // strcat(path2, "/");
-        // strcat
     }
-    printf("Reading in: %s\n", dirname);
-    struct dirent *entity;
-    entity = readdir(dir);
-    while (entity != NULL)
-    {
-        printf("%hhd  %s/%s\n",entity->d_type, dirname, entity->d_name);
-        char path[100] = {0};
-        strcat(path,dirname);
-        strcat(path,"/");
-        strcat(path,entity->d_name);
-        if (entity-> d_type == DT_DIR && strcmp (entity->d_name,".") != 0 && strcmp (entity->d_name,"..") != 0) {
+    else {
+        printf("Reading in: %s\n", dirname);
+        struct dirent *entity;
+        entity = readdir(dir);
+        while (entity != NULL)
+        {
+            printf("%hhd  %s/%s\n",entity->d_type, dirname, entity->d_name);
             char path[100] = {0};
             strcat(path,dirname);
             strcat(path,"/");
             strcat(path,entity->d_name);
-            // char path[100] = {0};
-            // strcat(path,dirname);
-            // strcat(path,"/");
-            // strcat(path,entity->d_name);
-            list_file(path);
+            if (entity-> d_type == DT_DIR && strcmp (entity->d_name,".") != 0 && strcmp (entity->d_name,"..") != 0) {
+                char path[100] = {0};
+                strcat(path,dirname);
+                strcat(path,"/");
+                strcat(path,entity->d_name);
+                list_file(path);
+            }
+            // // If a file that can be read, read it
+            if (entity-> d_type == DT_REG) {
+                strings_list[str_ind_test] = search_word(path, 4);
+                str_ind_test++;
+            }
+            entity = readdir(dir);
         }
-        // // If a file that can be read, read it
-        if (entity-> d_type == DT_REG) {
-            strings_list[str_ind_test] = search_word(path, 4);
-            //search_word(path, 4);
-            str_ind_test++;
-        }
-        entity = readdir(dir);
+
     }
+    // printf("Reading in: %s\n", dirname);
+    // struct dirent *entity;
+    // entity = readdir(dir);
+    // while (entity != NULL)
+    // {
+    //     printf("%hhd  %s/%s\n",entity->d_type, dirname, entity->d_name);
+    //     char path[100] = {0};
+    //     strcat(path,dirname);
+    //     strcat(path,"/");
+    //     strcat(path,entity->d_name);
+    //     if (entity-> d_type == DT_DIR && strcmp (entity->d_name,".") != 0 && strcmp (entity->d_name,"..") != 0) {
+    //         char path[100] = {0};
+    //         strcat(path,dirname);
+    //         strcat(path,"/");
+    //         strcat(path,entity->d_name);
+    //         list_file(path);
+    //     }
+    //     // // If a file that can be read, read it
+    //     if (entity-> d_type == DT_REG) {
+    //         strings_list[str_ind_test] = search_word(path, 4);
+    //         str_ind_test++;
+    //     }
+    //     entity = readdir(dir);
+    // }
     closedir(dir);
     printf("str_ind_test: %i\n", str_ind_test);
 }
@@ -84,7 +100,7 @@ int find_file(char **filelist)
         list_file(filelist[i]);   
     }
 
-    
+    printf("word: %s\n", strings_list[0][7]);
     for (i = 0; i < str_ind_test; i++) {
         for (j = 0; strings_list[i][j] != NULL; j++) {
             printf("i: %i   j: %i\n", i, j);
