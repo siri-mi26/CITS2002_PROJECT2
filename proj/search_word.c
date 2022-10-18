@@ -30,10 +30,10 @@ char** search_word(char* filename, int length)
     int j = 0;
     int limit = 2;
     // Initialize array to hold strings
-    char ** strings = malloc(limit * sizeof(char*));
+    char ** strings = malloc(limit * sizeof(char*)); //2
     // Set the first value of the array to the name of the file
     char *full_pathname = realpath(filename, NULL);
-    strings[j] = malloc(strlen(full_pathname) * sizeof(char) + 1);
+    strings[j] = malloc(strlen(full_pathname) * sizeof(char) + 1); 
     strcpy(strings[j], full_pathname);
     j++;
     // Loop over file getting each character, and adding it to the string
@@ -43,7 +43,10 @@ char** search_word(char* filename, int length)
         i++;
         // Detect non-alphanumeric character
         if (isalnum(c) == 0) {
-            string[i - 1] = '\0';
+            // continue;
+            string[i - 1] = '\0'; 
+            
+            // printf("string %s ||strlen(string) %ld \n", string, strlen(string));
             if (strlen(string) != 0 && strlen(string) >= length) {
                 // If words reaches word limit, reallocate more memory
                 if (j == limit) {
@@ -62,20 +65,22 @@ char** search_word(char* filename, int length)
             }
             i = 0;
         }
+       
     }
     // Add last word before \0, if valid
-    if (isalnum(string[0]) != 0 && length <= 1) {
+    if (isalnum(string[0]) != 0 && length <= 1) {        
         strings[j] = malloc(strlen(string) * sizeof(char));
         strcpy(strings[j], string);
     }
     else {
         j--;
     }
+    
     fclose(file);
 
      
     for (i = 0; i < (j + 1); i++) {
-        printf("%s\n", strings[i]);
+        printf("strings[%i] %s\n", i, strings[i]);
     }
 
 

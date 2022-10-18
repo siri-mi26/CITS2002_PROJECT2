@@ -83,7 +83,8 @@ void list_file(char *dirname)
     //     entity = readdir(dir);
     // }
     closedir(dir);
-    printf("str_ind_test: %i\n", str_ind_test);
+    
+    
 }
 /* Will index all the files recursively of the file that is provided to the function */
 // find file in directory
@@ -100,7 +101,9 @@ int find_file(char **filelist)
         list_file(filelist[i]);   
     }
 
-    printf("word: %s\n", strings_list[0][7]);
+    // printf("word: %s\n", strings_list[0][7]);
+    printf("sizeof(strings_list) %ld\n", sizeof(strings_list));
+    printf("str_ind_test: %i\n", str_ind_test);
     for (i = 0; i < str_ind_test; i++) {
         for (j = 0; strings_list[i][j] != NULL; j++) {
             printf("i: %i   j: %i\n", i, j);

@@ -1,1 +1,2 @@
-I understand that for an isolated harmonic oscillator, the energy eignevalues are E=(n+1/2)ħω (I've done the derivation of this from Schrodinger's equation in a previous class). That means that the quantization of energy in that problem arises from Schrodinger's equation, right? But surely Schrodinger's equation doesn't apply to the Fourier coefficients? Then why should the Fourier coefficients satisfying the same equations as decoupled harmonic oscillators lead to the same quantization?
+indubitablysothathe I understand that for an isolated harmonic oscillator, 
+the energy eignevalues are (I've done the derivation of this from Schrodinger's equation in a
