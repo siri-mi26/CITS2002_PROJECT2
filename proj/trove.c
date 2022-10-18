@@ -158,11 +158,14 @@ int main(int argc, char *argv[])
     filelist_num = argc - cmd_opts - 1; // cmdopts = 4
     filelist = malloc(filelist_num * sizeof(char *));
     make_filelist(cmd_opts, argc, filelist_num, filelist, argv);
-    for (int i = (cmd_opts + 1); i < argc; i++)
-    {
-        printf("Filelist name %i: %s\n", (i - cmd_opts), argv[i]);
-        find_file(argv[i]);
-    }
+    str_ind_test = 0;
+    find_file(filelist);
+    //printf("filelist: %li\n", sizeof(filelist));
+    // for (int i = (cmd_opts + 1); i < argc; i++)
+    // {
+    //     printf("Filelist name %i: %s\n", (i - cmd_opts), argv[i]);
+    //     find_file(argv[i]);
+    // }
 
     // if (option_type = 1) {
         

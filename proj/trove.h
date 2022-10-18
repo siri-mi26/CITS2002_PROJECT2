@@ -4,10 +4,10 @@
 #include <ctype.h>
 #include <unistd.h>
 /* Trove header file containing required functions for all the other files */
-
+int str_ind_test;
 // TODO:
 // IN PROGRESS
-int find_file(char *filename);
+int find_file(char **filelist);
 void build_trovefile(char *trovefilename, char ***strings_list, int str_ind);
 
 void remove_trovefile();

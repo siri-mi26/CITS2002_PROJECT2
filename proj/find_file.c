@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,25 +5,20 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include <dirent.h>
-#include <errno.h>
 #include "trove.h"
+#include <errno.h>
 #define DT_DIR 4
 #define DT_REG 8
-
 /* Recursively goes through all files in current directory
 to find if input file exists */
-
 // Initialize strings_list to store all list of words
-// TODO: input as pathnames need to be taken in 
 char ***strings_list;
 int str_ind = 0;
-int array_size = 10;
 void list_file(char *dirname)
-{
-    DIR *dir = opendir(dirname); // tries to open assuming it's a directory
-    FILE *single_file;    
-
-    if (dir == NULL) // It could be a single file or non-existent file
+{    
+    DIR *dir = opendir(dirname);
+    FILE *single_file;
+    if (dir == NULL)
     {
         // Will try to open assuming it's an existing file first
         if ((single_file = fopen(dirname, "r")) == 0) // If 0, some error occurred in opening file
@@ -32,79 +26,71 @@ void list_file(char *dirname)
             fprintf(stderr, "Failed to open %s for reading (%d: %s)\n", dirname, errno, strerror(errno));
             // NO return statement here as one file might not be existing but others might be
         }
-        // No error occurred so it can be searched
-        search_word(dirname, 4);
 
-        
+        // No error occured so it can be searched
+        printf("Single file: %s\n", dirname);
+        strings_list[str_ind_test] = search_word(dirname, 4);
+        str_ind_test++;
         return;
+        // char path2[100] = {0};
+        // strcat(path2, dirname);
+        // strcat(path2, "/");
+        // strcat
     }
-
     printf("Reading in: %s\n", dirname);
     struct dirent *entity;
     entity = readdir(dir);
-
     while (entity != NULL)
     {
-        printf("%hhd  %s/%s\n", entity->d_type, dirname, entity->d_name);
+        printf("%hhd  %s/%s\n",entity->d_type, dirname, entity->d_name);
         char path[100] = {0};
-        strcat(path, dirname);
-        strcat(path, "/");
-        strcat(path, entity->d_name);
-        if (entity->d_type == DT_DIR && strcmp(entity->d_name, ".") != 0 && strcmp(entity->d_name, "..") != 0)
-        // If the files are not "." and ".."
-        {
-
+        strcat(path,dirname);
+        strcat(path,"/");
+        strcat(path,entity->d_name);
+        if (entity-> d_type == DT_DIR && strcmp (entity->d_name,".") != 0 && strcmp (entity->d_name,"..") != 0) {
             char path[100] = {0};
-            strcat(path, dirname);
-            strcat(path, "/");
-            strcat(path, entity->d_name);
+            strcat(path,dirname);
+            strcat(path,"/");
+            strcat(path,entity->d_name);
             // char path[100] = {0};
             // strcat(path,dirname);
             // strcat(path,"/");
             // strcat(path,entity->d_name);
             list_file(path);
         }
-        // If a file that can be read, read it
-        if (entity->d_type == DT_REG)
-        {
-            printf("sizeof %ld\n", sizeof(strings_list));
-            strings_list[str_ind] = search_word(path, 4);
-            printf("[str_ind]  %i\n", str_ind );
-            // search_word(path, 4);
-            str_ind++;
-            if (str_ind == array_size) {
-                array_size *= 2;
-                strings_list = realloc(strings_list, array_size);                
-            }
-            printf("sizeof %ld\n", sizeof(strings_list));
+        // // If a file that can be read, read it
+        if (entity-> d_type == DT_REG) {
+            strings_list[str_ind_test] = search_word(path, 4);
+            //search_word(path, 4);
+            str_ind_test++;
         }
         entity = readdir(dir);
     }
-
-
-closedir(dir);
-printf("str_ind: %i\n", str_ind);
+    closedir(dir);
+    printf("str_ind_test: %i\n", str_ind_test);
 }
-
-/* Will index all the files recursively of the file that are provided to the function.
-This function is called for every item in filelist, so it returns all of the indexed words for that file/directory only.*/
-int find_file(char *filename)
+/* Will index all the files recursively of the file that is provided to the function */
+// find file in directory
+// if no exist, return false
+// must be word
+// call search_word();
+int find_file(char **filelist)
 {
-    strings_list = malloc(sizeof(char **) * array_size);
+    int i;
+    int j;
 
-    list_file(filename);
+    strings_list = malloc(sizeof(char**) * 8);
+    for (i = 0; filelist[i] != NULL; i++) {
+        list_file(filelist[i]);   
+    }
+
     
-    // int i;
-    // int j;
-    // for (i = 0; i < str_ind; i++) {
-    //     for (j = 0; strings_list[i][j] != NULL; j++) {
-    //         printf("i: %i   j: %i\n", i, j);
-    //         printf("word: %s\n", strings_list[i][j]);
-    //     }
-    // }
+    for (i = 0; i < str_ind_test; i++) {
+        for (j = 0; strings_list[i][j] != NULL; j++) {
+            printf("i: %i   j: %i\n", i, j);
+            printf("word: %s\n", strings_list[i][j]);
+        }
+    }
 
-    build_trovefile("trovey", strings_list, str_ind);
-
-    free(strings_list);
     return 0;
 }
