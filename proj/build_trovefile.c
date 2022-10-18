@@ -11,40 +11,40 @@ This function creates a new trovefile given a filelist
 @length is temporary!!
 // TODO: write full_index to trovefile/creates trovefile initially
  */
-void build_trovefile(char *filename, char **filelist, int length)
+void build_trovefile(char *trovefilename, char ***strings_list, int str_ind)
 {
     printf("build_trovefile\n");
+    FILE * fp;
+    int i;
+    int j;
     
-    
-    
-    find_file(filename);
 
-    // find_file(filename);
+     char str[100]; //TODO: change size
+   strcpy(str, "@");
+    fp = fopen(trovefilename, "w");
 
-    /* FILE *fp;
-    char line[256]; // not sure how long one line will be    
-    int exists = 1;
-    exists = access(filename, W_OK);
-    printf("exists %i\n", exists);
-
-    fp = fopen(filename, "r+");
-    if (fp == NULL)
+    for (i = 0; i < str_ind; i++)
     {
-        printf("exit\n");
-        printf("Error message");
-        exit(EXIT_FAILURE);
+        // copy over filename
+        // strcat(str, strings_list[i]);
+    fwrite(str, 1, sizeof(str), fp);
+        for (j = 0; strings_list[i][j] != NULL; j++)
+        // copy over words PER filename
+        {
+            // printf("i: %i   j: %i\n", i, j);
+            // printf("word: %s\n", strings_list[i][j]);
+            // fwrite(strings_list[i][j], 1, sizeof(strings_list[i][j]), fp);
+        }
     }
-
-    printf("sizeof(line) %ld\n", sizeof(line));
-    while (fgets(line, sizeof(line), fp) != NULL) // TODO: check size of file line is 100
-    {
-        printf("line %s\n", line);
-    }
-    fclose(fp); */
-
-
-
     
+    
+    fclose(fp);
+
+  
+    // printf("here\n");
+    
+
+
     // for each file
     // search_file()
     // returns strings

@@ -10,12 +10,15 @@
 #include "trove.h"
 #define DT_DIR 4
 #define DT_REG 8
+
 /* Recursively goes through all files in current directory
 to find if input file exists */
 
 // Initialize strings_list to store all list of words
+// TODO: input as pathnames need to be taken in 
 char ***strings_list;
 int str_ind = 0;
+int array_size = 10;
 void list_file(char *dirname)
 {
     DIR *dir = opendir(dirname); // tries to open assuming it's a directory
@@ -64,9 +67,16 @@ void list_file(char *dirname)
         // If a file that can be read, read it
         if (entity->d_type == DT_REG)
         {
+            printf("sizeof %ld\n", sizeof(strings_list));
             strings_list[str_ind] = search_word(path, 4);
+            printf("[str_ind]  %i\n", str_ind );
             // search_word(path, 4);
             str_ind++;
+            if (str_ind == array_size) {
+                array_size *= 2;
+                strings_list = realloc(strings_list, array_size);                
+            }
+            printf("sizeof %ld\n", sizeof(strings_list));
         }
         entity = readdir(dir);
     }
@@ -76,25 +86,25 @@ closedir(dir);
 printf("str_ind: %i\n", str_ind);
 }
 
-/* Will index all the files recursively of the file that is provided to the function */
-// find file in directory
-// if no exist, return false
-// must be word
-// call search_word();
+/* Will index all the files recursively of the file that are provided to the function.
+This function is called for every item in filelist, so it returns all of the indexed words for that file/directory only.*/
 int find_file(char *filename)
 {
-    strings_list = malloc(sizeof(char **) * 8);
+    strings_list = malloc(sizeof(char **) * array_size);
 
     list_file(filename);
     
-    int i;
-    int j;
-    for (i = 0; i < str_ind; i++) {
-        for (j = 0; strings_list[i][j] != NULL; j++) {
-            printf("i: %i   j: %i\n", i, j);
-            printf("word: %s\n", strings_list[i][j]);
-        }
-    }
+    // int i;
+    // int j;
+    // for (i = 0; i < str_ind; i++) {
+    //     for (j = 0; strings_list[i][j] != NULL; j++) {
+    //         printf("i: %i   j: %i\n", i, j);
+    //         printf("word: %s\n", strings_list[i][j]);
+    //     }
+    // }
 
+    build_trovefile("trovey", strings_list, str_ind);
+
+    free(strings_list);
     return 0;
 }

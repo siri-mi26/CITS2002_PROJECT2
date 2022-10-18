@@ -143,6 +143,14 @@ int main(int argc, char *argv[])
     // TODO: write it into proper file
 
     // if (option_type == 1)
+    /*
+        for file in filelist:
+    find_file(file)
+    for openable_file in each subdirectory:
+        file_words <- search_word(file)
+        strings_list.append(file_words)
+
+    strings_file_to_disk(strings_list) */
     char *test;
     test = realpath(".", NULL);
     printf("realpath: %s\n", test);
@@ -152,43 +160,18 @@ int main(int argc, char *argv[])
     make_filelist(cmd_opts, argc, filelist_num, filelist, argv);
     for (int i = (cmd_opts + 1); i < argc; i++)
     {
-
-        /*
-        so for -b
-
-    for file in filelist:
-    find_file(file)
-    for openable_file in each subdirectory:
-        file_words <- search_word(file)
-        strings_list.append(file_words)
-
-    strings_file_to_disk(strings_list) */
-
-        // for (int i = 0; i < filelist_num; i++)
-        // {
-        //     find_file(filelist[i]);
-        // }
-
-        filelist_num = argc - cmd_opts - 1; // cmdopts = 4
-        // printf("filelist_num %i\n", filelist_num); works
-        filelist = malloc(filelist_num * sizeof(char *));
-        make_filelist(cmd_opts, argc, filelist_num, filelist, argv);
-        for (int i = (cmd_opts + 1); i < argc; i++)
-        {
-            printf("Filelist name %i: %s\n", (i - cmd_opts), argv[i]);
-            find_file(argv[i]);
-        }
+        printf("Filelist name %i: %s\n", (i - cmd_opts), argv[i]);
+        find_file(argv[i]);
     }
+
+    // if (option_type = 1) {
+        
+    // }
 
     /* When extra arguments are passed */
     // for(; optind < argc; optind++) {
     //     printf("Unknown argument given: %s\n", argv[optind]);
     // }
-    /*
-    commandline_checker();
-    get_trovefile();
-    build_trovefile();
-    index_file();
-    */
+
     exit(EXIT_SUCCESS);
 }
