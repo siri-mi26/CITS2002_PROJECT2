@@ -25,14 +25,15 @@ void list_file(char *dirname)
 
     if (dir == NULL) // It could be a single file or non-existent file
     {
+        
         // Will try to open assuming it's an existing file first
         if ((single_file = fopen(dirname, "r")) == 0) // If 0, some error occurred in opening file
         {
             fprintf(stderr, "Failed to open %s for reading (%d: %s)\n", dirname, errno, strerror(errno));
             // NO return statement here as one file might not be existing but others might be
         }
-        // No error occurred so it can be searched
-        // printf("---------------------------------------THIS IS WHERE IT\'S GOING IN\n");
+        // No error occurred so it's a single file that can be searched
+        printf("---------------------------------------THIS IS WHERE IT\'S GOING IN\n");
 
         // search_word(dirname, 4);
 
@@ -80,16 +81,21 @@ void list_file(char *dirname)
         if (entity->d_type == DT_REG)
         {
             printf("sizeof %ld\n", sizeof(strings_list));
+            printf("-------------here\n");
             strings_list[str_ind] = search_word(path, 4);
+            printf("-------------here\n");
             printf("[str_ind]  %i\n", str_ind);
             // search_word(path, 4);
             str_ind++;
             if (str_ind == array_size)
             {
                 array_size *= 2;
+                
                 strings_list = realloc(strings_list, array_size);
+                
             }
             printf("sizeof %ld\n", sizeof(strings_list));
+            printf("array_size %i\n", array_size);
         }
         entity = readdir(dir);
     }
@@ -106,14 +112,14 @@ int find_file(char *filename)
 
     list_file(filename);
 
-    // int i;
-    // int j;
-    // for (i = 0; i < str_ind; i++) {
-    //     for (j = 0; strings_list[i][j] != NULL; j++) {
-    //         printf("i: %i   j: %i\n", i, j);
-    //         printf("word: %s\n", strings_list[i][j]);
-    //     }
-    // }
+    int i;
+    int j;
+    for (i = 0; i < str_ind; i++) {
+        for (j = 0; strings_list[i][j] != NULL; j++) {
+            printf("i: %i   j: %i\n", i, j);
+            printf("word: %s\n", strings_list[i][j]);
+        }
+    }
 
     // if strings
     // if strings_list

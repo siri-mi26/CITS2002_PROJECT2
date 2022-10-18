@@ -19,8 +19,9 @@ void build_trovefile(char *trovefilename, char ***strings_list, int str_ind)
     int j;
     trovefilename = get_trovefile();
 
-    // char str[100]; // TODO: change size
-    // strcpy(str, "@");
+    char str[100]; // TODO: change size
+    strcpy(str, "@");
+    printf("str %s\n", str);
     // fp = fopen(trovefilename, "w");
 
     for (i = 0; i < str_ind; i++)
@@ -31,8 +32,15 @@ void build_trovefile(char *trovefilename, char ***strings_list, int str_ind)
         for (j = 0; strings_list[i][j] != NULL; j++)
         // copy over words PER filename
         {
-            // strcat(str, strings_list[i][0]);
+
+
+
             printf("strings_list[i] %s\n", strings_list[i][0]);
+
+
+            
+            // strcat(str, strings_list[i][0]);
+            
             // printf("i: %i   j: %i\n", i, j);
             // printf("word: %s\n", strings_list[i][j]);
             // fwrite(strings_list[i][j], 1, sizeof(strings_list[i][j]), fp);
