@@ -86,12 +86,15 @@ int find_file(char *filename)
     strings_list = malloc(sizeof(char **) * 8);
 
     list_file(filename);
+    
+    int i;
+    int j;
+    for (i = 0; i < str_ind; i++) {
+        for (j = 0; strings_list[i][j] != NULL; j++) {
+            printf("i: %i   j: %i\n", i, j);
+            printf("word: %s\n", strings_list[i][j]);
+        }
+    }
 
-    // printf("word: %li\n", sizeof(strings_list[3]));
-    // printf("word: %s\n", strings_list[1][0]);
-    // printf("word: %s\n", strings_list[2][0]);
-    // printf("word: %s\n", strings_list[3][0]);
-    // printf("word: %s\n", strings_list[4][0]);
-    // printf("word: %s\n", strings_list[5][0]);
     return 0;
 }

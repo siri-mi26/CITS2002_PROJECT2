@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "trove.h": "c"
+        "trove.h": "c",
+        "unistd.h": "c"
     }
 }

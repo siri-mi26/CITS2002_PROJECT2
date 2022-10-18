@@ -17,6 +17,7 @@ It can be used to:
 #include <unistd.h>
 #include "trove.h"
 #include <getopt.h>
+// char *realpath(const char *__restrict__file_name, char *__restrict__resolved_name);
 // Add the command line argument options:
 #define OPTLIST "f:brul:"
 /* This file checks command line options to determine whether:
@@ -34,7 +35,6 @@ void make_filelist(int cmd_opts, int argc, int filelist_num, char **filelist, ch
     {
         filelist[i - cmd_opts - 1] = malloc((256 + 1) * sizeof(char)); // 256 is max filename length
         strcpy(filelist[i - cmd_opts - 1], argv[i]);                   // different indices, as the for loop starts at 4, whereas this loop should start at 0 to get first element of filelist
-        
     }
 }
 int commandline_error(char *argument)
@@ -101,7 +101,6 @@ int main(int argc, char *argv[])
             printf("option_type %i\n", option_type);
             // printf("cmd_opts %i\n", cmd_opts);
 
-       
             break;
         case 'r':
             if (option_type != 0)
@@ -136,20 +135,27 @@ int main(int argc, char *argv[])
     // These are filelist names (I think)
 
     // TODO: usage function?
-    
+
     // printf("cmd_opts %i\n", cmd_opts);
 
     // TODO: if option_type == etc
     // TODO: make it into file
     // TODO: write it into proper file
-    
-    
-    if (option_type == 1)
+
+    // if (option_type == 1)
+    char *test;
+    test = realpath(".", NULL);
+    printf("realpath: %s\n", test);
+
+    filelist_num = argc - cmd_opts - 1; // cmdopts = 4
+    filelist = malloc(filelist_num * sizeof(char *));
+    make_filelist(cmd_opts, argc, filelist_num, filelist, argv);
+    for (int i = (cmd_opts + 1); i < argc; i++)
     {
-        
+
         /*
         so for -b
-    
+
     for file in filelist:
     find_file(file)
     for openable_file in each subdirectory:
@@ -172,7 +178,6 @@ int main(int argc, char *argv[])
             printf("Filelist name %i: %s\n", (i - cmd_opts), argv[i]);
             find_file(argv[i]);
         }
-
     }
 
     /* When extra arguments are passed */
