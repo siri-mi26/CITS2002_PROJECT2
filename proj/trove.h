@@ -12,6 +12,7 @@ void build_trovefile(char *filename, char **filelist, int length);
 
 void remove_trovefile();
 void update_trovefile();
+void another_func();
 
 // DONE
 // void create_trovefile();

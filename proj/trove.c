@@ -34,10 +34,11 @@ void make_filelist(int cmd_opts, int argc, int filelist_num, char **filelist, ch
     {
         filelist[i - cmd_opts - 1] = malloc((256 + 1) * sizeof(char)); // 256 is max filename length
         strcpy(filelist[i - cmd_opts - 1], argv[i]);                   // different indices, as the for loop starts at 4, whereas this loop should start at 0 to get first element of filelist
-        printf("filelist[i] %s\n", filelist[i - cmd_opts - 1]);
+        
     }
 }
-int commandline_error(char *argument) {
+int commandline_error(char *argument)
+{
     printf("Error: Additional argument in command line: '%s'\n", argument);
     exit(EXIT_FAILURE);
 }
@@ -53,7 +54,7 @@ int main(int argc, char *argv[])
     char *trovefile_name = "/tmp/trove";
     // char *trovefile_name = NULL;
     int length = 4;
-    int option_type = 0; //b r u = 1,2,3 respectively. if 0 => prompt 1
+    int option_type = 0; // b r u = 1,2,3 respectively. if 0 => prompt 1
     int cmd_opts = 0;
     int filelist_num = 0;
     char **filelist;
@@ -90,21 +91,21 @@ int main(int argc, char *argv[])
             }
             break;
         case 'b':
-            if (option_type != 0) {
+            if (option_type != 0)
+            {
                 commandline_error("-b");
             }
             cmd_opts += 1;
             printf("u typed b\n");
             option_type = 1;
             printf("option_type %i\n", option_type);
-            printf("cmd_opts %i\n", cmd_opts);
+            // printf("cmd_opts %i\n", cmd_opts);
 
-
-            // build_trovefile(trovefile_name, filelist);
-            // l is inside search_word()
+       
             break;
         case 'r':
-            if (option_type != 0) {
+            if (option_type != 0)
+            {
                 commandline_error("-r");
             }
             cmd_opts += 1;
@@ -113,7 +114,8 @@ int main(int argc, char *argv[])
             remove_trovefile();
             break;
         case 'u':
-            if (option_type != 0) {
+            if (option_type != 0)
+            {
                 commandline_error("-u");
             }
             cmd_opts += 1;
@@ -129,32 +131,49 @@ int main(int argc, char *argv[])
             break;
         }
     }
-    // TODO: if option_type == etc
-    // TODO: how do we do multiple command line arguments
+
     // Get additional command line arguments
     // These are filelist names (I think)
 
     // TODO: usage function?
-    printf("cmd_opts %i\n", cmd_opts);
-    //printf("cmd_opts %i\n", cmd_opts);
+    
+    // printf("cmd_opts %i\n", cmd_opts);
 
-    filelist_num = argc - cmd_opts - 1; //cmdopts = 4
-    filelist = malloc(filelist_num * sizeof(char *));
-    make_filelist(cmd_opts, argc, filelist_num, filelist, argv);
-    for (int i = (cmd_opts + 1); i < argc; i++)
-    {
-        printf("Filelist name %i: %s\n", (i - cmd_opts), argv[i]);
-        find_file(argv[i]);
-
-        // filelist[i - cmd_opts - 1] = malloc((256 + 1) * sizeof(char)); // 256 is max filename length
-        // strcpy(filelist[i - cmd_opts - 1], argv[i]);                   // different indices, as the for loop starts at 4, whereas this loop should start at 0 to get first element of filelist
-        // printf("filelist[i] %s\n", filelist[i - cmd_opts - 1]);
-    }
-
-
+    // TODO: if option_type == etc
     // TODO: make it into file
     // TODO: write it into proper file
- 
+    
+    
+    if (option_type == 1)
+    {
+        
+        /*
+        so for -b
+    
+    for file in filelist:
+    find_file(file)
+    for openable_file in each subdirectory:
+        file_words <- search_word(file)
+        strings_list.append(file_words)
+
+    strings_file_to_disk(strings_list) */
+
+        // for (int i = 0; i < filelist_num; i++)
+        // {
+        //     find_file(filelist[i]);
+        // }
+
+        filelist_num = argc - cmd_opts - 1; // cmdopts = 4
+        // printf("filelist_num %i\n", filelist_num); works
+        filelist = malloc(filelist_num * sizeof(char *));
+        make_filelist(cmd_opts, argc, filelist_num, filelist, argv);
+        for (int i = (cmd_opts + 1); i < argc; i++)
+        {
+            printf("Filelist name %i: %s\n", (i - cmd_opts), argv[i]);
+            find_file(argv[i]);
+        }
+
+    }
 
     /* When extra arguments are passed */
     // for(; optind < argc; optind++) {
