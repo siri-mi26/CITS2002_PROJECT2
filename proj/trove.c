@@ -110,7 +110,6 @@ int main(int argc, char *argv[])
             cmd_opts += 1;
             printf("u typed r\n");
             option_type = 2;
-            remove_trovefile();
             break;
         case 'u':
             if (option_type != 0)
@@ -120,7 +119,6 @@ int main(int argc, char *argv[])
             cmd_opts += 1;
             printf("u typed u\n");
             option_type = 3;
-            update_trovefile();
             break;
         case 'l':
             cmd_opts += 2;
@@ -151,15 +149,27 @@ int main(int argc, char *argv[])
         strings_list.append(file_words)
 
     strings_file_to_disk(strings_list) */
-    char *test;
-    test = realpath(".", NULL);
-    printf("realpath: %s\n", test);
 
     filelist_num = argc - cmd_opts - 1; // cmdopts = 4
     filelist = malloc(filelist_num * sizeof(char *));
     make_filelist(cmd_opts, argc, filelist_num, filelist, argv);
-    str_ind_test = 0;
-    find_file(filelist);
+
+
+    str_ind = 0;
+
+
+    if (option_type == 1) {
+        // -b called
+        find_file(filelist);
+        printf("Built a trove file!\nExitting...\n");
+        exit(EXIT_SUCCESS);
+    }
+    if (option_type == 2) {
+        // -r called
+        remove_trove(trovefile_name, filelist, filelist_num);
+        printf("Removed some files from trovefile\nexitting...\n");
+        exit(EXIT_SUCCESS);
+    }
     //printf("filelist: %li\n", sizeof(filelist));
     // for (int i = (cmd_opts + 1); i < argc; i++)
     // {

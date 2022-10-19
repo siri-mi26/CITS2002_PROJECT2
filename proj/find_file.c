@@ -28,8 +28,8 @@ void list_file(char *dirname)
 
         // No error occured so it can be searched
         printf("Single file: %s\n", dirname);
-        strings_list[str_ind_test] = search_word(dirname, 4);
-        str_ind_test++;
+        strings_list[str_ind] = search_word(dirname, 4);
+        str_ind++;
     }
     else {
         printf("Reading in: %s\n", dirname);
@@ -51,8 +51,8 @@ void list_file(char *dirname)
             }
             // // If a file that can be read, read it
             if (entity-> d_type == DT_REG) {
-                strings_list[str_ind_test] = search_word(path, 4);
-                str_ind_test++;
+                strings_list[str_ind] = search_word(path, 4);
+                str_ind++;
             }
             entity = readdir(dir);
         }
@@ -83,7 +83,7 @@ void list_file(char *dirname)
     //     entity = readdir(dir);
     // }
     closedir(dir);
-    printf("str_ind_test: %i\n", str_ind_test);
+    printf("str_ind: %i\n", str_ind);
 }
 /* Will index all the files recursively of the file that is provided to the function */
 // find file in directory
@@ -101,14 +101,14 @@ int find_file(char **filelist)
     }
 
     printf("word: %s\n", strings_list[0][7]);
-    for (i = 0; i < str_ind_test; i++) {
+    for (i = 0; i < str_ind; i++) {
         for (j = 0; strings_list[i][j] != NULL; j++) {
             printf("i: %i   j: %i\n", i, j);
             printf("word: %s\n", strings_list[i][j]);
         }
     }
 
-    build_trovefile2("test.txt", strings_list, str_ind_test);
+    build_trovefile2("test.txt", strings_list, str_ind);
 
     return 0;
 }
