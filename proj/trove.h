@@ -9,6 +9,7 @@ int str_ind_test;
 // IN PROGRESS
 int find_file(char **filelist);
 void build_trovefile(char *trovefilename, char ***strings_list, int str_ind);
+void build_trovefile2(char *trovefilename, char ***strings_list, int str_ind);
 
 void remove_trovefile();
 void update_trovefile();

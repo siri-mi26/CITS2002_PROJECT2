@@ -108,5 +108,7 @@ int find_file(char **filelist)
         }
     }
 
+    build_trovefile2("test.txt", strings_list, str_ind_test);
+
     return 0;
 }
