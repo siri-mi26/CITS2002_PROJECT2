@@ -1,18 +1,22 @@
 #include "trove.h"
+#include <stdbool.h>
 
-/*
-TODO: add params
-This function updates any files in the given trovefile
-from filelist
+#define FILENAME_SIZE 1024
+#define MAX_LINE 2048
 
-@trovefile
-@filelist */
 
-void update_trovefile()
+void update_trovefile(char *filename, char **filelist, int filelist_num)
 {
-    // for x in filelist
-        // if x in trovefile
-            // remove from trovefile
-        // index it
-        // add to trovefile
+    
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // 2. 
+
+    /*
+     * What about -r the files that aren't in the filelist
+     * Then append files in filelist
+     * At some point, have call (find_file, for each file in filelist)
+     * 
+     * 
+     * 
+    */
 }

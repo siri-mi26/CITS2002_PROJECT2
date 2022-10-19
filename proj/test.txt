@@ -11,12 +11,8 @@ include stdio include string include dirent main argc char argv opendir NULL ret
 @/home/ryantakeda/cits2002/project2/CITS2002_PROJECT2/proj/randomfiles/commandoption_checker.c
 include stdio include stdlib include string include ctype include stdbool include unistd include trove trovefile length filelist void commandoptionchecker char word printf commandoptionchecker running 
 @/home/ryantakeda/cits2002/project2/CITS2002_PROJECT2/proj/randomfiles/boo2
-Ä>∑êU 
+ 
 @/home/ryantakeda/cits2002/project2/CITS2002_PROJECT2/proj/randomfiles/hash_table.c
 include stdio include stdlib include string include ctype include stdbool include unistd include trove Builds trovefile index from given filelist This will replace existing trovefile with same name define NAME define TABLE SIZE struct line value void display table struct line size size TABLE SIZE printf value tkey TABLE SIZE printf value hash table struct line hash table TABLE SIZE printf enter three integers TABLE SIZE scanf hash table TABLE SIZE value hash table TABLE SIZE TABLE SIZE printf display table hash table TABLE SIZE printf word return 
 @/home/ryantakeda/cits2002/project2/CITS2002_PROJECT2/proj/randomfiles/list
 lib64 linux libc readdir closedir puts opendir finalize libc start main GLIBC deregisterTMCloneTable gmon start registerTMCloneTable 
-@/home/ryantakeda/cits2002/project2/CITS2002_PROJECT2/proj/goofy/valo_noob.exe
-understand that isolated harmonic oscillator energy eignevalues done derivation this from Schrodinger equation previous class That means that quantization energy that problem arises from Schrodinger equation right surely Schrodinger equation doesn apply Fourier coefficients Then should Fourier coefficients satisfying same equations decoupled harmonic oscillators lead same quantization 
-@/home/ryantakeda/cits2002/project2/CITS2002_PROJECT2/proj/goofy/goofy2/anotherfile.txt
-

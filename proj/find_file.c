@@ -64,7 +64,7 @@ void list_file(char *dirname)
 }
 
 /* Will index all the files recursively of the file that is provided to the function */
-int find_file(char **filelist, int filelist_num)
+int find_file(char **filelist, int filelist_num, int option_type)
 {
     int i;
     //int j;
@@ -76,15 +76,12 @@ int find_file(char **filelist, int filelist_num)
         list_file(filelist[i]);
 
     }
-    printf("asdasdasd\n");
-    //printf("word: %s\n", strings_list[0][7]);
-    // for (i = 0; i < str_ind; i++) {
-    //     for (j = 0; strings_list[i][j] != NULL; j++) {
-    //         printf("i: %i   j: %i\n", i, j);
-    //         printf("word: %s\n", strings_list[i][j]);
-    //     }
-    // }
-
+    if (option_type == 1) {
+        build_trovefile2("test.txt", strings_list, str_ind);
+    }
+    if (option_type == 3) {
+        
+    }
     build_trovefile2("test.txt", strings_list, str_ind);
 
     return 0;

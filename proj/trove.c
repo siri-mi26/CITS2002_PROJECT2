@@ -160,15 +160,20 @@ int main(int argc, char *argv[])
 
     if (option_type == 1) {
         // -b called
-        find_file(filelist, filelist_num);
-        printf("Built a trove file!\nExitting...\n");
-        exit(EXIT_SUCCESS);
+        find_file(filelist, filelist_num, option_type);
+        printf("Built a trove file!\nexitting...\n");
     }
     if (option_type == 2) {
         // -r called
         remove_trove(trovefile_name, filelist, filelist_num);
         printf("Removed some files from trovefile\nexitting...\n");
-        exit(EXIT_SUCCESS);
+    }
+    if (option_type == 3) {
+        // -u called
+        remove_trove(trovefile_name, filelist, filelist_num);
+        printf("Removed some files from trovefile for updating\n");
+        find_file(filelist, filelist_num, option_type);
+        printf("Updated the trovfile!\nexitting...\n");
     }
     //printf("filelist: %li\n", sizeof(filelist));
     // for (int i = (cmd_opts + 1); i < argc; i++)
