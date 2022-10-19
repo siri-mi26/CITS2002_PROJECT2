@@ -160,7 +160,7 @@ int main(int argc, char *argv[])
 
     if (option_type == 1) {
         // -b called
-        find_file(filelist);
+        find_file(filelist, filelist_num);
         printf("Built a trove file!\nExitting...\n");
         exit(EXIT_SUCCESS);
     }

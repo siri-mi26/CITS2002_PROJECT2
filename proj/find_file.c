@@ -14,7 +14,8 @@ to find if input file exists */
 // Initialize strings_list to store all list of words
 char ***strings_list;
 void list_file(char *dirname)
-{    
+{   
+    printf("Will now list_file: %s\n", dirname);
     DIR *dir = opendir(dirname);
     FILE *single_file;
     if (dir == NULL)
@@ -58,55 +59,31 @@ void list_file(char *dirname)
         }
 
     }
-    // printf("Reading in: %s\n", dirname);
-    // struct dirent *entity;
-    // entity = readdir(dir);
-    // while (entity != NULL)
-    // {
-    //     printf("%hhd  %s/%s\n",entity->d_type, dirname, entity->d_name);
-    //     char path[100] = {0};
-    //     strcat(path,dirname);
-    //     strcat(path,"/");
-    //     strcat(path,entity->d_name);
-    //     if (entity-> d_type == DT_DIR && strcmp (entity->d_name,".") != 0 && strcmp (entity->d_name,"..") != 0) {
-    //         char path[100] = {0};
-    //         strcat(path,dirname);
-    //         strcat(path,"/");
-    //         strcat(path,entity->d_name);
-    //         list_file(path);
-    //     }
-    //     // // If a file that can be read, read it
-    //     if (entity-> d_type == DT_REG) {
-    //         strings_list[str_ind_test] = search_word(path, 4);
-    //         str_ind_test++;
-    //     }
-    //     entity = readdir(dir);
-    // }
     closedir(dir);
     printf("str_ind: %i\n", str_ind);
 }
+
 /* Will index all the files recursively of the file that is provided to the function */
-// find file in directory
-// if no exist, return false
-// must be word
-// call search_word();
-int find_file(char **filelist)
+int find_file(char **filelist, int filelist_num)
 {
     int i;
-    int j;
+    //int j;
+    //printf("not sure yet: %li\n", sizeof(char**));
+    strings_list = malloc(sizeof(char**) * 32);
+    for (i = 0; i < filelist_num; i++) {
+        printf("i now: %i\n", i);
+        printf("LOOKING AT NEW FILELIST ITEM\n-----------------------\n");
+        list_file(filelist[i]);
 
-    strings_list = malloc(sizeof(char**) * 8);
-    for (i = 0; filelist[i] != NULL; i++) {
-        list_file(filelist[i]);   
     }
-
-    printf("word: %s\n", strings_list[0][7]);
-    for (i = 0; i < str_ind; i++) {
-        for (j = 0; strings_list[i][j] != NULL; j++) {
-            printf("i: %i   j: %i\n", i, j);
-            printf("word: %s\n", strings_list[i][j]);
-        }
-    }
+    printf("asdasdasd\n");
+    //printf("word: %s\n", strings_list[0][7]);
+    // for (i = 0; i < str_ind; i++) {
+    //     for (j = 0; strings_list[i][j] != NULL; j++) {
+    //         printf("i: %i   j: %i\n", i, j);
+    //         printf("word: %s\n", strings_list[i][j]);
+    //     }
+    // }
 
     build_trovefile2("test.txt", strings_list, str_ind);
 

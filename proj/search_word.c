@@ -49,8 +49,8 @@ char** search_word(char* filename, int length)
                 if (j == limit) {
                     limit = limit * 2;
                     strings = realloc(strings, limit * sizeof(char*));
-                    printf("limit: %i\n", limit);
-                    printf("reallocing: %li\n", limit * sizeof(char*));
+                    // printf("limit: %i\n", limit);
+                    // printf("reallocing: %li\n", limit * sizeof(char*));
                 }
                 strings[j] = malloc(strlen(string) * sizeof(char) + 1);
                 strcpy(strings[j], string);

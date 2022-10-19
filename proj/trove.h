@@ -8,7 +8,7 @@ int str_ind;
 // TODO:
 // Deal with empty files
 // IN PROGRESS
-int find_file(char **filelist);
+int find_file(char **filelist, int filelist_num);
 void build_trovefile(char *trovefilename, char ***strings_list, int str_ind);
 
 void remove_trovefile();
