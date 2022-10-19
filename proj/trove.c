@@ -79,16 +79,15 @@ int main(int argc, char *argv[])
             cmd_opts += 2;
             printf("u typed f\n");
             trovefile_name = optarg;
-            printf("file given with f option: %s\n", trovefile_name);
             // if -f and word: It searches for word, reading from the trove-file.
-            if (argc == 4)
-            {
-                // could be filelist or word
-                // check if word or filelist func();
-                search_word(argv[3], length);
-                // if file exists, index_file();
-                // if no file exists, search_word();
-            }
+            // if (argc == 4)
+            // {
+            //     // could be filelist or word
+            //     // check if word or filelist func();
+            //     search_word(argv[3], length);
+            //     // if file exists, index_file();
+            //     // if no file exists, search_word();
+            // }
             break;
         case 'b':
             if (option_type != 0)
@@ -157,22 +156,26 @@ int main(int argc, char *argv[])
 
     str_ind = 0;
 
-
+    if (option_type == 0) {
+        // Search trovefile
+        search_trove(trovefile_name, filelist[0]);
+        printf("    Searched for a word!\nexitting...\n");
+    }
     if (option_type == 1) {
         // -b called
         find_file(filelist, filelist_num, option_type);
-        printf("Built a trove file!\nexitting...\n");
+        printf("    Built a trove file!\nexitting...\n");
     }
     if (option_type == 2) {
         // -r called
         remove_trove(trovefile_name, filelist, filelist_num);
-        printf("Removed some files from trovefile\nexitting...\n");
+        printf("    Removed some files from trovefile\nexitting...\n");
     }
     if (option_type == 3) {
         // -u called
         remove_trove(trovefile_name, filelist, filelist_num);
         find_file(filelist, filelist_num, option_type);
-        printf("Updated the trovfile!\nexitting...\n");
+        printf("    Updated the trovfile!\nexitting...\n");
     }
     
     exit(EXIT_SUCCESS);
