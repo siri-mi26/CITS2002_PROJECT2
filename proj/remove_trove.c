@@ -26,25 +26,32 @@ void remove_trove(char *trovefilename, char **filelist, int filelist_num)
 
     bool keep_reading = true;
 
-    char *filename_path = realpath(filelist[0], NULL);
+    char *filename_path;
     bool skip = false;
+    bool keep;
+    int i;
     do
     {
-
+        keep = false;
         fgets(buffer, MAX_LINE, file);
-        printf("buffer: %s\n", buffer);
         if (skip == true) {
             skip = false;
             continue;
         }
         if (feof(file)) {
             keep_reading = false;
+            break;
         }
-        else if (strstr(buffer, filename_path) == false) {
+        for (i = 0; i < filelist_num; i++) {
+            filename_path = realpath(filelist[i], NULL);
+            if (strstr(buffer, filename_path) == false) {
+                keep = true;
+            }
+        }
+        if (keep == true) {
             fputs(buffer, temp);
         }
         else {
-            printf("Removing 2 lines\n");
             skip = true;
         }
     }while (keep_reading);
@@ -54,6 +61,4 @@ void remove_trove(char *trovefilename, char **filelist, int filelist_num)
 
     remove(trovefilename);
     rename(temp_filename, trovefilename);
-
-
 }
