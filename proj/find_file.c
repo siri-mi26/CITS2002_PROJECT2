@@ -93,8 +93,9 @@ void list_file(char *dirname)
 // call search_word();
 int find_file(char **filelist, int filelist_num)
 {
-    int i;
-    int j;
+    int i=0;
+    int i2 =0;
+    int j =0;
 
     strings_list = malloc(sizeof(char**) * 8);
     for (i = 0; filelist[i] != NULL; i++) {
@@ -102,14 +103,13 @@ int find_file(char **filelist, int filelist_num)
     }
 
     // printf("word: %s\n", strings_list[0][7]);
-    printf("sizeof(strings_list) %ld\n", sizeof(strings_list));
-    printf("str_ind_test: %i\n", str_ind_test);
-    for (i = 0; i < str_ind_test; i++) {
-        for (j = 0; strings_list[i][j] != NULL; j++) {
-            printf("i: %i   j: %i\n", i, j);
-            printf("word: %s\n", strings_list[i][j]);
+
+    for (i2 = 0; i2 < str_ind_test; i2++) {
+        for (j = 0; strings_list[i2][j] != NULL; j++) {
+            printf("i2: %i2   j: %i2\n", i2, j);
+            printf("word: %s\n", strings_list[i2][j]);
         }
     }
-    build_trovefile("trovey.txt", strings_list, filelist_num);
+    // build_trovefile("trovey.txt", strings_list, filelist_num);
     return 0;
 }

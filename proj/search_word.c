@@ -79,9 +79,9 @@ char** search_word(char* filename, int length)
     fclose(file);
 
      
-    for (i = 0; i < (j + 1); i++) {
-        printf("strings[%i] %s\n", i, strings[i]);
-    }
+    // for (i = 0; i < (j + 1); i++) {
+    //     printf("strings[%i] %s\n", i, strings[i]);
+    // }
 
 
     return strings;
