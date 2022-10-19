@@ -171,25 +171,9 @@ int main(int argc, char *argv[])
     if (option_type == 3) {
         // -u called
         remove_trove(trovefile_name, filelist, filelist_num);
-        printf("Removed some files from trovefile for updating\n");
         find_file(filelist, filelist_num, option_type);
         printf("Updated the trovfile!\nexitting...\n");
     }
-    //printf("filelist: %li\n", sizeof(filelist));
-    // for (int i = (cmd_opts + 1); i < argc; i++)
-    // {
-    //     printf("Filelist name %i: %s\n", (i - cmd_opts), argv[i]);
-    //     find_file(argv[i]);
-    // }
-
-    // if (option_type = 1) {
-        
-    // }
-
-    /* When extra arguments are passed */
-    // for(; optind < argc; optind++) {
-    //     printf("Unknown argument given: %s\n", argv[optind]);
-    // }
-
+    
     exit(EXIT_SUCCESS);
 }

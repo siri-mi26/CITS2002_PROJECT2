@@ -5,7 +5,6 @@ void append_trovefile(char *trovefilename, char ***strings_list, int str_ind)
     FILE *fp = fopen("test.txt", "a");
 
     int i, j;
-    //char word[100];
     for (i = 0; i < str_ind; i++) {
         for (j = 0; strings_list[i][j] != NULL; j++) {
             if (j == 0) {

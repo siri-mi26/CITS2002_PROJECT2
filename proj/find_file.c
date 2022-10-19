@@ -77,12 +77,11 @@ int find_file(char **filelist, int filelist_num, int option_type)
 
     }
     if (option_type == 1) {
-        build_trovefile2("test.txt", strings_list, str_ind);
+        build_trovefile("test.txt", strings_list, str_ind);
     }
     if (option_type == 3) {
-        
+        build_trovefile("test.txt", strings_list, str_ind);
     }
-    build_trovefile2("test.txt", strings_list, str_ind);
 
     return 0;
 }
