@@ -3,8 +3,6 @@
 TODO: change comment from "returned" to ?? after its done (mebe)
 This function searches a given filename and returns all the words (once per word)
 If length parameter is supplied, only words less than or equal to that length will be returned
-@filename 
-@length 
  */
 /* Search a given file to return all words read
    If length parameter is supplied, only return words greater than */

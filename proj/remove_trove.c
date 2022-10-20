@@ -1,5 +1,4 @@
 #include "trove.h"
-#include <stdbool.h>
 
 #define FILENAME_SIZE 1024
 #define MAX_LINE 2048

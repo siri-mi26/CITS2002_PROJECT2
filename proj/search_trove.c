@@ -1,19 +1,22 @@
 #include "trove.h"
 
 #define MAX_LINE 2048
+
 void print_stripped(char *word) {
     //Strip the '@' from the filepath, and print
     word = word + 1;
     printf("%s", word);
 }
 
+/* Search through a trove
+   Iterate through lines, getting index of pathnames who's corresponding words contain the given word
+   Rewind, and iterate through lines, printing lines if they are the correct index */
 int search_trove(char *trove_filename, char *word)
 {
     FILE *file;
 
     char buffer[MAX_LINE];
     int success = 0;
-
 
     file = fopen(trove_filename, "r");
 
@@ -33,14 +36,17 @@ int search_trove(char *trove_filename, char *word)
             line_counter++;
         }
     }
+
     int word_arr[line_counter];
     int counter = 0;
     int i = 0;
+
     for (i = 0; i < line_counter; i++) {
         word_arr[i] = 0;
     }
     rewind(file);
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    // Get the indexes of lines that have the word we want
     do
     {
         fgets(buffer, MAX_LINE, file);
@@ -67,10 +73,11 @@ int search_trove(char *trove_filename, char *word)
         }
     }while (keep_reading);
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     rewind(file);
     counter = 1;
     keep_reading = true;
+
+    // Print lines from the file who's index has been saved
     do
     {
         fgets(buffer, MAX_LINE, file);
