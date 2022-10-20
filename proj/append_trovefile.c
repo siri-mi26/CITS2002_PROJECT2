@@ -17,4 +17,5 @@ void append_trovefile(char *trovefilename, char ***strings_list, int str_ind)
         fprintf(fp, "\n");
     }
     fclose(fp);
+    
 }
