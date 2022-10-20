@@ -13,7 +13,7 @@ void append_trovefile(char *trovefilename, char ***strings_list, int str_ind);
 int search_trove(char *trove_filename, char *word);
 
 // DONE
-void build_trovefile(char *trovefilename, char ***strings_list, int str_ind);
+char *** build_trovefile(char *trovefilename, char ***strings_list, int str_ind);
 void remove_trove(char *trovefilename, char **filelist, int filelist_num);
 char** search_word(char *filename, int length);
 

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "trove.h"
 
-void build_trovefile(char *trovefilename, char ***strings_list, int str_ind)
+char *** build_trovefile(char *trovefilename, char ***strings_list, int str_ind)
 {
     FILE *fp = fopen(trovefilename, "w");
 
@@ -19,4 +19,5 @@ void build_trovefile(char *trovefilename, char ***strings_list, int str_ind)
         fprintf(fp, "\n");
     }
     fclose(fp);
+    return strings_list;
 }
