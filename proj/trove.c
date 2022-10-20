@@ -10,10 +10,6 @@ It can be used to:
 -Update an existing index
 */
 
-// TODO:
-// - Look at build_trovefile, cuz defualt with no -f doesn't work
-//   If the trove_filename has a / make a directory or smth? cuz it doesn't work
-// - Add things like more than 1 argument in first invocation
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,18 +18,10 @@ It can be used to:
 #include <unistd.h>
 #include "trove.h"
 #include <getopt.h>
-// char *realpath(const char *__restrict__file_name, char *__restrict__resolved_name);
-// Add the command line argument options:
+
 #define OPTLIST "f:brul:"
-/* This file checks command line options to determine whether:
--A word is being searched for (when found, the filenames containing the word will be returned)
-OR
--A list of files (given as "filelist") need to be indexed
-*/
-/* This file finds and gets the trovefile */
-void get_trovefile()
-{
-}
+
+/* A function that fills an array called filelist with names in the filelist */
 void make_filelist(int cmd_opts, int argc, int filelist_num, char **filelist, char *argv[])
 {
     for (int i = (cmd_opts + 1); i < argc; i++)
@@ -42,22 +30,27 @@ void make_filelist(int cmd_opts, int argc, int filelist_num, char **filelist, ch
         strcpy(filelist[i - cmd_opts - 1], argv[i]);                   // different indices, as the for loop starts at 4, whereas this loop should start at 0 to get first element of filelist
     }
 }
+
+/* Function to report error */
 int commandline_error(char *argument)
 {
     printf("Error: Additional argument in command line: '%s'\n", argument);
     exit(EXIT_FAILURE);
 }
+
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
 {
     // Define variables to hold command line arguments
     int opt;
-    char *trovefile_name = "tmp/trove";
+    char *trovefile_name = "/tmp/trove";        // Set default trovefile name
     int length = 4;
     int option_type = 0; // b r u = 1,2,3 respectively. if 0 => prompt 1
     int cmd_opts = 0;
     int filelist_num = 0;
     char **filelist;
+    int success;
+    // Read command line options
     while ((opt = getopt(argc, argv, OPTLIST)) != -1)
     {
         switch (opt)
@@ -102,32 +95,27 @@ int main(int argc, char *argv[])
     make_filelist(cmd_opts, argc, filelist_num, filelist, argv);
 
     str_ind = 0;
-    int success;
 
-    if (option_type == 0) {
-        // Search trovefile
+    if (option_type == 0) {                 //Search trovefile
         success = search_trove(trovefile_name, filelist[0]);
-        printf("Searched for a word!\nexitting...\n");
+        printf("    Searched for a word!\n    exitting...\n");
         if (success == 0) {
             printf("Could not find word\n");
             exit(EXIT_FAILURE);
         }
     }
-    if (option_type == 1) {
-        // -b called
+    if (option_type == 1) {                 // -b called
         find_file(filelist, filelist_num, option_type, trovefile_name, length);
-        printf("Built a trove file!\nexitting...\n");
+        printf("    Built a trove file!\n    exitting...\n");
     }
-    if (option_type == 2) {
-        // -r called
+    if (option_type == 2) {                 // -r called
         remove_trove(trovefile_name, filelist, filelist_num);
-        printf("Removed some files from trovefile\nexitting...\n");
+        printf("    Removed some files from trovefile\n    exitting...\n");
     }
-    if (option_type == 3) {
-        // -u called
+    if (option_type == 3) {                 // -u called
         remove_trove(trovefile_name, filelist, filelist_num);
         find_file(filelist, filelist_num, option_type, trovefile_name, length);
-        printf("Updated the trovfile!\nexitting...\n");
+        printf("    Updated the trovfile!\n    exitting...\n");
     }
     
     exit(EXIT_SUCCESS);

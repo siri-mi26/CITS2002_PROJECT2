@@ -6,36 +6,42 @@ If length parameter is supplied, only words less than or equal to that length wi
 @filename 
 @length 
  */
+/* Search a given file to return all words read
+   If length parameter is supplied, only return words greater than */
 char** search_word(char* filename, int length)
 {
-    printf("Searching in %s\n", filename);
     // Open file
     FILE *file;
     file = fopen(filename, "r");
     if (file == NULL) {                             // Error checking
-        printf("Couldn't open file\n");
+        perror("Error: ");
         exit(EXIT_FAILURE);
     }
     // Get length (number of characters) in file
     fseek(file, 0, SEEK_END);
     int file_length = ftell(file);
     fseek(file, 0, SEEK_SET);
+
     // Initialize string for size of length
     char *string = malloc(sizeof(char) * (file_length + 1));
-    //char *string = malloc(strlen(file_length) + 1);
+
     // Initialize characters/indexes
     char c;
     int i = 0;
     int k = 0;
     int j = 0;
     int limit = 2;
+
     // Initialize array to hold strings
     char ** strings = malloc(limit * sizeof(char*));
+
     // Set the first value of the array to the name of the file
     char *full_pathname = realpath(filename, NULL);
     strings[j] = malloc(strlen(full_pathname) * sizeof(char) + 1);
     strcpy(strings[j], full_pathname);
+
     j++;
+
     // Loop over file getting each character, and adding it to the string
     while((c = fgetc(file)) != EOF) 
     {
@@ -49,14 +55,13 @@ char** search_word(char* filename, int length)
                 if (j == limit) {
                     limit = limit * 2;
                     strings = realloc(strings, limit * sizeof(char*));
-                    // printf("limit: %i\n", limit);
-                    // printf("reallocing: %li\n", limit * sizeof(char*));
                 }
+                // Put the word into final string
                 strings[j] = malloc(strlen(string) * sizeof(char) + 1);
                 strcpy(strings[j], string);
                 j++;
             }
-            // "Reset string"
+            // Reset the string to be written in again
             for (k = 0; k < (i + 1); k++) {
                 string[k] = '\0';
             }
@@ -72,12 +77,6 @@ char** search_word(char* filename, int length)
         j--;
     }
     fclose(file);
-
-     
-    // for (i = 0; i < (j + 1); i++) {
-    //     printf("uh: %s\n", strings[i]);
-    // }
-
 
     return strings;
 }

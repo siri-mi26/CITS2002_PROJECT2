@@ -9,7 +9,6 @@ void print_stripped(char *word) {
 
 int search_trove(char *trove_filename, char *word)
 {
-    printf("important word: %s\n", word);
     FILE *file;
 
     char buffer[MAX_LINE];
