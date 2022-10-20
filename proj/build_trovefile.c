@@ -3,7 +3,7 @@
 
 void build_trovefile(char *trovefilename, char ***strings_list, int str_ind)
 {
-    FILE *fp = fopen("test.txt", "w");
+    FILE *fp = fopen(trovefilename, "w");
 
     int i, j;
     for (i = 0; i < str_ind; i++) {

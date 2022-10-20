@@ -45,34 +45,16 @@ int commandline_error(char *argument)
 /* Invokes the necessary functions to search trovefile or modify it */
 int main(int argc, char *argv[])
 {
-    // find_file(argc,argv);
-    // create_trovefile();
-    // search_word(argv[1]);
-    // index_file();
     // Define variables to hold command line arguments
     int opt;
-    char *trovefile_name = "/tmp/trove";
-    // char *trovefile_name = NULL;
+    char *trovefile_name = "tmp/trove";
     int length = 4;
     int option_type = 0; // b r u = 1,2,3 respectively. if 0 => prompt 1
     int cmd_opts = 0;
     int filelist_num = 0;
     char **filelist;
-    // char filelist[20][256+1]; //256 because that is max length of filename
-    // TODO: how many command line arguments are we going to have max??
-    // ^ PROB CHANGE THIS NAME LATER
-    // Go through command line arguments
-    /* -b,r,u = prompt2 */
     while ((opt = getopt(argc, argv, OPTLIST)) != -1)
     {
-        // for (int i = (cmd_opts + 1); i < argc; i++)
-        // {
-        //     // printf("Filelist name %i: %s\n", (i - cmd_opts), argv[i]);
-        //     filelist[i - cmd_opts - 1] = malloc((256 + 1) * sizeof(char)); // 256 is max filename length
-        //     strcpy(filelist[i - cmd_opts - 1], argv[i]);                   // different indices, as the for loop starts at 4, whereas this loop should start at 0 to get first element of filelist
-        //     printf("filelist[i] %s\n", filelist[i - cmd_opts - 1]);
-        //     // find_file(argv[i]);
-        // }
         switch (opt)
         {
         case 'f':
@@ -130,7 +112,7 @@ int main(int argc, char *argv[])
     }
     if (option_type == 1) {
         // -b called
-        find_file(filelist, filelist_num, option_type);
+        find_file(filelist, filelist_num, option_type, trovefile_name, length);
         printf("Built a trove file!\nexitting...\n");
     }
     if (option_type == 2) {
@@ -141,7 +123,7 @@ int main(int argc, char *argv[])
     if (option_type == 3) {
         // -u called
         remove_trove(trovefile_name, filelist, filelist_num);
-        find_file(filelist, filelist_num, option_type);
+        find_file(filelist, filelist_num, option_type, trovefile_name, length);
         printf("Updated the trovfile!\nexitting...\n");
     }
     

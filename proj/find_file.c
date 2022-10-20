@@ -13,7 +13,7 @@
 to find if input file exists */
 // Initialize strings_list to store all list of words
 char ***strings_list;
-void list_file(char *dirname)
+void list_file(char *dirname, char *trove_filename, int max_length)
 {   
     printf("Will now list_file: %s\n", dirname);
     DIR *dir = opendir(dirname);
@@ -29,7 +29,7 @@ void list_file(char *dirname)
 
         // No error occured so it can be searched
         printf("Single file: %s\n", dirname);
-        strings_list[str_ind] = search_word(dirname, 4);
+        strings_list[str_ind] = search_word(dirname, max_length);
         str_ind++;
     }
     else {
@@ -48,11 +48,11 @@ void list_file(char *dirname)
                 strcat(path,dirname);
                 strcat(path,"/");
                 strcat(path,entity->d_name);
-                list_file(path);
+                list_file(path, trove_filename, max_length);
             }
             // // If a file that can be read, read it
             if (entity-> d_type == DT_REG) {
-                strings_list[str_ind] = search_word(path, 4);
+                strings_list[str_ind] = search_word(path, max_length);
                 str_ind++;
             }
             entity = readdir(dir);
@@ -64,7 +64,7 @@ void list_file(char *dirname)
 }
 
 /* Will index all the files recursively of the file that is provided to the function */
-int find_file(char **filelist, int filelist_num, int option_type)
+int find_file(char **filelist, int filelist_num, int option_type, char *trove_filename, int max_length)
 {
     int i;
     //int j;
@@ -73,14 +73,14 @@ int find_file(char **filelist, int filelist_num, int option_type)
     for (i = 0; i < filelist_num; i++) {
         printf("i now: %i\n", i);
         printf("LOOKING AT NEW FILELIST ITEM\n-----------------------\n");
-        list_file(filelist[i]);
+        list_file(filelist[i], trove_filename, max_length);
 
     }
     if (option_type == 1) {
-        build_trovefile("test.txt", strings_list, str_ind);
+        build_trovefile(trove_filename, strings_list, str_ind);
     }
     if (option_type == 3) {
-        build_trovefile("test.txt", strings_list, str_ind);
+        build_trovefile(trove_filename, strings_list, str_ind);
     }
 
     return 0;
