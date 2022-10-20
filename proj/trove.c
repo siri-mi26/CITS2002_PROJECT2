@@ -164,18 +164,18 @@ int main(int argc, char *argv[])
     if (option_type == 1) {
         // -b called
         find_file(filelist, filelist_num, option_type);
-        printf("    Built a trove file!\nexitting...\n");
+        printf("Built a trove file!\nexitting...\n");
     }
     if (option_type == 2) {
         // -r called
         remove_trove(trovefile_name, filelist, filelist_num);
-        printf("    Removed some files from trovefile\nexitting...\n");
+        printf("Removed some files from trovefile\nexitting...\n");
     }
     if (option_type == 3) {
         // -u called
         remove_trove(trovefile_name, filelist, filelist_num);
         find_file(filelist, filelist_num, option_type);
-        printf("    Updated the trovfile!\nexitting...\n");
+        printf("Updated the trovfile!\nexitting...\n");
     }
     
     exit(EXIT_SUCCESS);
