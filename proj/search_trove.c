@@ -1,13 +1,19 @@
 #include "trove.h"
 
 #define MAX_LINE 2048
+void print_stripped(char *word) {
+    //Strip the '@' from the filepath, and print
+    word = word + 1;
+    printf("%s", word);
+}
 
-void search_trove(char *trove_filename, char *word)
+int search_trove(char *trove_filename, char *word)
 {
     printf("important word: %s\n", word);
     FILE *file;
 
     char buffer[MAX_LINE];
+    int success = 0;
 
 
     file = fopen(trove_filename, "r");
@@ -19,7 +25,6 @@ void search_trove(char *trove_filename, char *word)
 
     bool keep_reading = true;
     char *trove_word;
-    //int success = 0;
     int line_counter = 0;
     char c;
 
@@ -29,40 +34,32 @@ void search_trove(char *trove_filename, char *word)
             line_counter++;
         }
     }
-    printf("Number of lines: %i\n", line_counter);
-    //int file_p[line_counter];
-    int test[line_counter];
+    int word_arr[line_counter];
     int counter = 0;
     int i = 0;
     for (i = 0; i < line_counter; i++) {
-        test[i] = 0;
+        word_arr[i] = 0;
     }
     rewind(file);
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     do
     {
-        printf("counter: %i\n", counter);
         fgets(buffer, MAX_LINE, file);
-        printf("buffer: %s\n", buffer);
         if (feof(file)) {
             keep_reading = false;
             break;
         }
         if (buffer[0] == '@') {
-            printf("^@\n");
-            // file_p[i] = ftell(file);
-            // printf("file_p[%i] = %i\n", i, file_p[i]);
             counter++;
             continue;
         }
         else {
-            printf("in else\n");
             trove_word = strtok(buffer, " ");
             while (trove_word != NULL)
             {
                 if (strcmp(trove_word, word) == 0) {
-                    printf("This one has the word\n");
-                    test[counter] = 1;
+                    word_arr[counter] = 1;
+                    success = 1;
                     break;
                 }
                 trove_word = strtok(NULL, " ");
@@ -77,18 +74,18 @@ void search_trove(char *trove_filename, char *word)
     keep_reading = true;
     do
     {
-        //printf("counter: %i\n", counter);
         fgets(buffer, MAX_LINE, file);
-        //printf("buffer: %s\n", buffer);
         if (feof(file)) {
             keep_reading = false;
             break;
         }
-        if (test[counter] == 1) {
-            printf("%s\n", buffer);
+        if (word_arr[counter] == 1) {
+            print_stripped(buffer);
         }
         counter++;
     }while (keep_reading);
 
     fclose(file);
+
+    return success;
 }

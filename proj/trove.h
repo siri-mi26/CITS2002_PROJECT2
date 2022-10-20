@@ -10,7 +10,7 @@ int str_ind;
 // IN PROGRESS
 int find_file(char **filelist, int filelist_num, int option_type);
 void append_trovefile(char *trovefilename, char ***strings_list, int str_ind);
-void search_trove(char *trove_filename, char *word);
+int search_trove(char *trove_filename, char *word);
 
 // DONE
 void build_trovefile(char *trovefilename, char ***strings_list, int str_ind);

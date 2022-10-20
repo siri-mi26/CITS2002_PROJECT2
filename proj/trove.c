@@ -77,17 +77,7 @@ int main(int argc, char *argv[])
         {
         case 'f':
             cmd_opts += 2;
-            printf("u typed f\n");
             trovefile_name = optarg;
-            // if -f and word: It searches for word, reading from the trove-file.
-            // if (argc == 4)
-            // {
-            //     // could be filelist or word
-            //     // check if word or filelist func();
-            //     search_word(argv[3], length);
-            //     // if file exists, index_file();
-            //     // if no file exists, search_word();
-            // }
             break;
         case 'b':
             if (option_type != 0)
@@ -95,9 +85,7 @@ int main(int argc, char *argv[])
                 commandline_error("-b");
             }
             cmd_opts += 1;
-            printf("u typed b\n");
             option_type = 1;
-            printf("option_type %i\n", option_type);
             // printf("cmd_opts %i\n", cmd_opts);
 
             break;
@@ -107,7 +95,6 @@ int main(int argc, char *argv[])
                 commandline_error("-r");
             }
             cmd_opts += 1;
-            printf("u typed r\n");
             option_type = 2;
             break;
         case 'u':
@@ -116,50 +103,30 @@ int main(int argc, char *argv[])
                 commandline_error("-u");
             }
             cmd_opts += 1;
-            printf("u typed u\n");
             option_type = 3;
             break;
         case 'l':
             cmd_opts += 2;
-            printf("u typed l\n");
             length = atoi(optarg);
-            printf("l %i\n", length);
             break;
         }
     }
-
-    // Get additional command line arguments
-    // These are filelist names (I think)
-
-    // TODO: usage function?
-
-    // printf("cmd_opts %i\n", cmd_opts);
-
-    // TODO: if option_type == etc
-    // TODO: make it into file
-    // TODO: write it into proper file
-
-    // if (option_type == 1)
-    /*
-        for file in filelist:
-    find_file(file)
-    for openable_file in each subdirectory:
-        file_words <- search_word(file)
-        strings_list.append(file_words)
-
-    strings_file_to_disk(strings_list) */
 
     filelist_num = argc - cmd_opts - 1; // cmdopts = 4
     filelist = malloc(filelist_num * sizeof(char *));
     make_filelist(cmd_opts, argc, filelist_num, filelist, argv);
 
-
     str_ind = 0;
+    int success;
 
     if (option_type == 0) {
         // Search trovefile
-        search_trove(trovefile_name, filelist[0]);
-        printf("    Searched for a word!\nexitting...\n");
+        success = search_trove(trovefile_name, filelist[0]);
+        printf("Searched for a word!\nexitting...\n");
+        if (success == 0) {
+            printf("Could not find word\n");
+            exit(EXIT_FAILURE);
+        }
     }
     if (option_type == 1) {
         // -b called
