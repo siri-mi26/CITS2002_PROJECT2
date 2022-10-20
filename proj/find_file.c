@@ -80,7 +80,7 @@ int find_file(char **filelist, int filelist_num, int option_type, char *trove_fi
         build_trovefile(trove_filename, strings_list, str_ind);
     }
     if (option_type == 3) {
-        build_trovefile(trove_filename, strings_list, str_ind);
+        append_trovefile(trove_filename, strings_list, str_ind);
     }
 
     return 0;

@@ -9,6 +9,11 @@ It can be used to:
 -Remove information from such an index
 -Update an existing index
 */
+
+// TODO:
+// - Look at build_trovefile, cuz defualt with no -f doesn't work
+//   If the trove_filename has a / make a directory or smth? cuz it doesn't work
+// - Add things like more than 1 argument in first invocation
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -68,8 +73,6 @@ int main(int argc, char *argv[])
             }
             cmd_opts += 1;
             option_type = 1;
-            // printf("cmd_opts %i\n", cmd_opts);
-
             break;
         case 'r':
             if (option_type != 0)
