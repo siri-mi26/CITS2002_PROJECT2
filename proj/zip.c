@@ -6,7 +6,7 @@
 
 #include <sys/wait.h>
 #include "trove.h"
-int zip(char *** fullindex)
+int zip(int option_type, char ***fullindex, char *trovefile_name)
 {
     // char ***fullindex = build_trovefile(trove_filename, strings_list, str_ind);
     // build_trovefile(trove_filename, strings_list, str_ind);

@@ -58,6 +58,7 @@ int main(int argc, char *argv[])
         case 'f':
             cmd_opts += 2;
             trovefile_name = optarg;
+            
             break;
         case 'b':
             if (option_type != 0)

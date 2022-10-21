@@ -80,10 +80,14 @@ int find_file(char **filelist, int filelist_num, int option_type, char *trove_fi
         list_file(filelist[i], trove_filename, max_length);
     }
     // -b was called
+    
     if (option_type == 1)
     {
+        
         char ***fullindex = build_trovefile(trove_filename, strings_list, str_ind);
-        zip(fullindex);
+        printf("b called\n");
+        zip(option_type, fullindex, NULL);
+        
         // build_trovefile(trove_filename, strings_list, str_ind);
 
         // int fd[2];
