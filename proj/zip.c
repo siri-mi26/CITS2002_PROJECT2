@@ -8,8 +8,7 @@
 #include "trove.h"
 int zip(int option_type, char ***fullindex, char *trovefile_name)
 {
-    
-    
+
     // char ***fullindex = build_trovefile(trove_filename, strings_list, str_ind);
     // build_trovefile(trove_filename, strings_list, str_ind);
 
@@ -24,11 +23,14 @@ int zip(int option_type, char ***fullindex, char *trovefile_name)
     {
         return 2;
     }
-printf("he7re\n");
+
     if (pid1 == 0)
     {
+        char temp[256];
+        strcpy(temp, trovefile_name);
+        strcat(temp, ".gz");
+
         dup2(fd[1], STDOUT_FILENO);
-        
         close(fd[0]);
         close(fd[1]);
 
@@ -36,20 +38,19 @@ printf("he7re\n");
         {
             write(1, fullindex, sizeof(fullindex));
         }
-        
+
         if (option_type == 2)
         {
-            
-            FILE * fp;
-            fp = fopen(trovefile_name, "r");
-            fseek(fp, 0L, SEEK_END);
-            int size = ftell(fp);
-            write(1, trovefile_name, size);
-            // char * temp = trovefile_name;
-            // strcpy(temp, ".gz");
-            // printf("name %s\n", temp);
 
-        
+            // FILE *fp;
+            // fp = fopen(trovefile_name, "r");
+            // fseek(fp, 0L, SEEK_END);
+            // int size = ftell(fp);
+            // write(1, trovefile_name, size);
+
+            // execlp("/usr/bin/zcat", "zcat", trovefile_name);
+            execlp("/usr/bin/zcat", "zcat", temp); //.gz file
+
             // execlp("zcat", )
         }
 
@@ -67,10 +68,11 @@ printf("he7re\n");
     if (pid2 == 0)
     {
         dup2(fd[0], STDIN_FILENO);
+
         close(fd[0]);
         close(fd[1]);
         // execlp("grep", "grep", "rtt", NULL);
-        printf("tmp %s\n", trovefile_name);
+        printf("trovefile_name %s\n", trovefile_name);
         execlp("/usr/bin/gzip", "gzip", "-f", "-k", trovefile_name, NULL);
     }
 
