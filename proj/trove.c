@@ -111,6 +111,7 @@ int main(int argc, char *argv[])
     }
     if (option_type == 2) {                 // -r called
         remove_trove(trovefile_name, filelist, filelist_num);
+        zip(option_type, NULL, trovefile_name);
         printf("    Removed some files from trovefile\n    exitting...\n");
     }
     if (option_type == 3) {                 // -u called

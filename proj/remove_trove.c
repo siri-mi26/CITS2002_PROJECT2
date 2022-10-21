@@ -62,4 +62,5 @@ void remove_trove(char *trovefilename, char **filelist, int filelist_num)
 
     remove(trovefilename);
     rename(temp_filename, trovefilename);
+    
 }

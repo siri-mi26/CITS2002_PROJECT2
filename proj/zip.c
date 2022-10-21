@@ -28,7 +28,19 @@ int zip(int option_type, char ***fullindex, char *trovefile_name)
         dup2(fd[1], STDOUT_FILENO);
         close(fd[0]);
         close(fd[1]);
-        write(1, fullindex, sizeof(fullindex));
+        if (option_type == 1)
+        {
+            write(1, fullindex, sizeof(fullindex));
+        }
+        if (option_type == 2)
+        {
+            FILE * fp;
+            fp = fopen(trovefile_name, "r");
+            fseek(fp, 0L, SEEK_END);
+            int size = ftell(fp);
+            write(1, trovefile_name, size);
+        }
+
         // execlp("ping", "ping", "-c", "5", "google.com", NULL);
         // since we use STDOUT it autocloses
     }
@@ -46,6 +58,7 @@ int zip(int option_type, char ***fullindex, char *trovefile_name)
         close(fd[0]);
         close(fd[1]);
         // execlp("grep", "grep", "rtt", NULL);
+        printf("tmp %s\n", trovefile_name);
         execlp("/usr/bin/gzip", "gzip", "-f", "-k", trovefile_name, NULL);
     }
 
