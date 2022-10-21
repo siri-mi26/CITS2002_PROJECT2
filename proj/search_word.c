@@ -1,17 +1,14 @@
 #include "trove.h"
-/* 
-TODO: change comment from "returned" to ?? after its done (mebe)
-This function searches a given filename and returns all the words (once per word)
-If length parameter is supplied, only words less than or equal to that length will be returned
- */
+
 /* Search a given file to return all words read
-   If length parameter is supplied, only return words greater than */
-char** search_word(char* filename, int length)
+If length parameter is supplied, only return words greater than length.*/
+char **search_word(char *filename, int length)
 {
     // Open file
     FILE *file;
     file = fopen(filename, "r");
-    if (file == NULL) {                             // Error checking
+    if (file == NULL)
+    { // Error checking
         perror("Error: ");
         exit(EXIT_FAILURE);
     }
@@ -31,7 +28,7 @@ char** search_word(char* filename, int length)
     int limit = 2;
 
     // Initialize array to hold strings
-    char ** strings = malloc(limit * sizeof(char*));
+    char **strings = malloc(limit * sizeof(char *));
 
     // Set the first value of the array to the name of the file
     char *full_pathname = realpath(filename, NULL);
@@ -41,18 +38,21 @@ char** search_word(char* filename, int length)
     j++;
 
     // Loop over file getting each character, and adding it to the string
-    while((c = fgetc(file)) != EOF) 
+    while ((c = fgetc(file)) != EOF)
     {
-        string[i] = c;                  // Add our character to our current string word
+        string[i] = c; // Add our character to our current string word
         i++;
         // Detect non-alphanumeric character
-        if (isalnum(c) == 0) {
+        if (isalnum(c) == 0)
+        {
             string[i - 1] = '\0';
-            if (strlen(string) != 0 && strlen(string) >= length) {
+            if (strlen(string) != 0 && strlen(string) >= length)
+            {
                 // If words reaches word limit, reallocate more memory
-                if (j == limit) {
+                if (j == limit)
+                {
                     limit = limit * 2;
-                    strings = realloc(strings, limit * sizeof(char*));
+                    strings = realloc(strings, limit * sizeof(char *));
                 }
                 // Put the word into final string
                 strings[j] = malloc(strlen(string) * sizeof(char) + 1);
@@ -60,18 +60,21 @@ char** search_word(char* filename, int length)
                 j++;
             }
             // Reset the string to be written in again
-            for (k = 0; k < (i + 1); k++) {
+            for (k = 0; k < (i + 1); k++)
+            {
                 string[k] = '\0';
             }
             i = 0;
         }
     }
     // Add last word before \0, if valid
-    if (isalnum(string[0]) != 0 && length <= 1) {
+    if (isalnum(string[0]) != 0 && length <= 1)
+    {
         strings[j] = malloc(strlen(string) * sizeof(char));
         strcpy(strings[j], string);
     }
-    else {
+    else
+    {
         j--;
     }
     fclose(file);

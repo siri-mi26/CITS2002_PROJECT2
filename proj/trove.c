@@ -10,7 +10,7 @@ It can be used to:
 -Update an existing index
 
 \bug: If file is blank, the word is undefined. The file will also keep getting added to trovefile if -u is used repeatedly.
-\bug: If -f [trovefilename] is not specified, -u will not work 
+\bug: If -f [trovefilename] is not specified, -u will not work
 \bug: Does not work with .exe or .jpg files
 */
 
@@ -31,7 +31,7 @@ void make_filelist(int cmd_opts, int argc, int filelist_num, char **filelist, ch
     for (int i = (cmd_opts + 1); i < argc; i++)
     {
         filelist[i - cmd_opts - 1] = malloc((256 + 1) * sizeof(char)); // 256 is max filename length
-        strcpy(filelist[i - cmd_opts - 1], argv[i]);                   // different indices, as the for loop starts at 4, whereas this loop should start at 0 to get first element of filelist
+        strcpy(filelist[i - cmd_opts - 1], argv[i]);                   
     }
 }
 
@@ -47,9 +47,9 @@ int main(int argc, char *argv[])
 {
     // Define variables to hold command line arguments
     int opt;
-    char *trovefile_name = "/tmp/trove";        // Set default trovefile name
+    char *trovefile_name = "/tmp/trove"; // Set default trovefile name
     int length = 4;
-    int option_type = 0; // b r u = 1,2,3 respectively. if 0 => prompt 1
+    int option_type = 0; // -b -r -u = 1, 2, 3 respectively. If 0, it is invocation/prompt 1.
     int cmd_opts = 0;
     int filelist_num = 0;
     char **filelist;
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
         case 'f':
             cmd_opts += 2;
             trovefile_name = optarg;
-            
+
             break;
         case 'b':
             if (option_type != 0)
@@ -101,29 +101,34 @@ int main(int argc, char *argv[])
 
     str_ind = 0;
 
-    if (option_type == 0) {                 //Search trovefile
+    if (option_type == 0)
+    { // Search trovefile
         success = search_trove(trovefile_name, filelist[0]);
         printf("    Searched for a word!\n    exitting...\n");
-        if (success == 0) {
+        if (success == 0)
+        {
             printf("Could not find word\n");
             exit(EXIT_FAILURE);
         }
     }
-    if (option_type == 1) {                 // -b called
+    if (option_type == 1)
+    { // -b called
         find_file(filelist, filelist_num, option_type, trovefile_name, length);
         printf("    Built a trove file!\n    exitting...\n");
     }
-    if (option_type == 2) {                 // -r called
+    if (option_type == 2)
+    { // -r called
         remove_trove(trovefile_name, filelist, filelist_num);
         zip(option_type, NULL, trovefile_name);
         printf("    Removed some files from trovefile\n    exitting...\n");
     }
-    if (option_type == 3) {                 // -u called
+    if (option_type == 3)
+    { // -u called
         remove_trove(trovefile_name, filelist, filelist_num);
         find_file(filelist, filelist_num, option_type, trovefile_name, length);
-        
+
         printf("    Updated the trovfile!\n    exitting...\n");
     }
-    
+
     exit(EXIT_SUCCESS);
 }

@@ -8,7 +8,8 @@
 #include "trove.h"
 /* This function converts the given file into a .gz file
 For building a new trovefile: option_type = 1, and fullindex parameter is provided.
-For removing a trovefile: option_type = 2, trovefile_name is provided. */
+For removing a trovefile: option_type = 2, trovefile_name is provided. 
+Code adapted from: https://www.youtube.com/watch?v=6xbLgZpOBi8*/
 int zip(int option_type, char ***fullindex, char *trovefile_name)
 {
 
@@ -18,20 +19,22 @@ int zip(int option_type, char ***fullindex, char *trovefile_name)
     int fd[2];
     if (pipe(fd) == -1)
     {
-        return 1;
+        printf("Error in forking.\n");
+        exit(EXIT_FAILURE);
     }
 
     int pid1 = fork();
     if (pid1 < 0)
     {
-        return 2;
+        printf("Process ID less than 0.\n");
+        exit(EXIT_FAILURE);
     }
 
     if (pid1 == 0)
     {
-        char temp[256]; //The filename with the .gz extension
+        char temp[256]; // The filename with the .gz extension
         strcpy(temp, trovefile_name);
-        strcat(temp, ".gz"); 
+        strcat(temp, ".gz");
 
         dup2(fd[1], STDOUT_FILENO);
         close(fd[0]);
@@ -44,39 +47,24 @@ int zip(int option_type, char ***fullindex, char *trovefile_name)
 
         if (option_type == 2)
         {
-
-            // FILE *fp;
-            // fp = fopen(trovefile_name, "r");
-            // fseek(fp, 0L, SEEK_END);
-            // int size = ftell(fp);
-            // write(1, trovefile_name, size);
-
-            // execlp("/usr/bin/zcat", "zcat", trovefile_name);
-            execlp("/usr/bin/zcat", "zcat", temp); //.gz file
-
-            // execlp("zcat", )
+            execl("/usr/bin/zcat", "zcat", temp); //.gz file
         }
-
-        // execlp("ping", "ping", "-c", "5", "google.com", NULL);
-        // since we use STDOUT it autocloses
     }
 
     int pid2 = fork();
     if (pid2 < 0)
     {
-        printf("err\n");
-        return 3;
+        printf("Process ID less than 0.\n");
+        exit(EXIT_FAILURE);
     }
 
     if (pid2 == 0)
     {
         dup2(fd[0], STDIN_FILENO);
-
         close(fd[0]);
         close(fd[1]);
-        // execlp("grep", "grep", "rtt", NULL);
-        printf("trovefile_name %s\n", trovefile_name);
-        execlp("/usr/bin/gzip", "gzip", "-f", "-k", trovefile_name, NULL);
+
+        execl("/usr/bin/gzip", "gzip", "-f", "-k", trovefile_name, NULL);
     }
 
     close(fd[0]);
