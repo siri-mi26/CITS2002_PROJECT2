@@ -6,6 +6,9 @@
 
 #include <sys/wait.h>
 #include "trove.h"
+/* This function converts the given file into a .gz file
+For building a new trovefile: option_type = 1, and fullindex parameter is provided.
+For removing a trovefile: option_type = 2, trovefile_name is provided. */
 int zip(int option_type, char ***fullindex, char *trovefile_name)
 {
 
@@ -26,9 +29,9 @@ int zip(int option_type, char ***fullindex, char *trovefile_name)
 
     if (pid1 == 0)
     {
-        char temp[256];
+        char temp[256]; //The filename with the .gz extension
         strcpy(temp, trovefile_name);
-        strcat(temp, ".gz");
+        strcat(temp, ".gz"); 
 
         dup2(fd[1], STDOUT_FILENO);
         close(fd[0]);
