@@ -46,7 +46,7 @@ int zip(int option_type, char ***fullindex, char *trovefile_name)
         close(fd[0]);
         close(fd[1]);
         // execlp("grep", "grep", "rtt", NULL);
-        execlp("/usr/bin/gzip", "gzip", "-f", "trovey.txt", NULL);
+        execlp("/usr/bin/gzip", "gzip", "-f", "-k", trovefile_name, NULL);
     }
 
     close(fd[0]);

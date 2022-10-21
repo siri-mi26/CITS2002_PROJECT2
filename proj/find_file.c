@@ -86,7 +86,7 @@ int find_file(char **filelist, int filelist_num, int option_type, char *trove_fi
         
         char ***fullindex = build_trovefile(trove_filename, strings_list, str_ind);
         printf("b called\n");
-        zip(option_type, fullindex, NULL);
+        zip(option_type, fullindex, trove_filename);
         
         // build_trovefile(trove_filename, strings_list, str_ind);
 
