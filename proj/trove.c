@@ -96,11 +96,20 @@ int main(int argc, char *argv[])
 
     str_ind = 0;
 
+    if (argc - cmd_opts == 1) {
+        printf("    No word filelist provided");
+        exit(EXIT_FAILURE);
+    }
+
     if (option_type == 0) {                 //Search trovefile
+        if (argc - cmd_opts > 2) {
+            printf("    Too many words provided");
+            exit(EXIT_FAILURE);
+        }
         success = search_trove(trovefile_name, filelist[0]);
         printf("    Searched for a word!\n    exitting...\n");
         if (success == 0) {
-            printf("Could not find word\n");
+            printf("    Could not find word\n");
             exit(EXIT_FAILURE);
         }
     }
