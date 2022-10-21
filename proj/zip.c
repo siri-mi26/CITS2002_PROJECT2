@@ -8,6 +8,8 @@
 #include "trove.h"
 int zip(int option_type, char ***fullindex, char *trovefile_name)
 {
+    
+    
     // char ***fullindex = build_trovefile(trove_filename, strings_list, str_ind);
     // build_trovefile(trove_filename, strings_list, str_ind);
 
@@ -22,23 +24,33 @@ int zip(int option_type, char ***fullindex, char *trovefile_name)
     {
         return 2;
     }
-
+printf("he7re\n");
     if (pid1 == 0)
     {
         dup2(fd[1], STDOUT_FILENO);
+        
         close(fd[0]);
         close(fd[1]);
+
         if (option_type == 1)
         {
             write(1, fullindex, sizeof(fullindex));
         }
+        
         if (option_type == 2)
         {
+            
             FILE * fp;
             fp = fopen(trovefile_name, "r");
             fseek(fp, 0L, SEEK_END);
             int size = ftell(fp);
             write(1, trovefile_name, size);
+            // char * temp = trovefile_name;
+            // strcpy(temp, ".gz");
+            // printf("name %s\n", temp);
+
+        
+            // execlp("zcat", )
         }
 
         // execlp("ping", "ping", "-c", "5", "google.com", NULL);
