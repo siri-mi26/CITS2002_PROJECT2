@@ -22,6 +22,7 @@ void remove_trove(char *trovefilename, char **filelist, int filelist_num)
 
     if (file == NULL || temp == NULL) {
         perror("Error");
+        
         exit(EXIT_FAILURE);
     }
 

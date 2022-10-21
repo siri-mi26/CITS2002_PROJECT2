@@ -9,7 +9,9 @@ It can be used to:
 -Remove information from such an index
 -Update an existing index
 
-\bug: If file is blank, the word is undefined
+\bug: If file is blank, the word is undefined. The file will also keep getting added to trovefile if -u is used repeatedly.
+\bug: If -f [trovefilename] is not specified, -u will not work 
+\bug: Does not work with .exe or .jpg files
 */
 
 #include <stdio.h>

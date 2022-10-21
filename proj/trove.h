@@ -16,7 +16,7 @@ int find_file(char **filelist, int filelist_num, int option_type, char *trove_fi
 char *** append_trovefile(char *trovefilename, char ***strings_list, int str_ind);
 int search_trove(char *trove_filename, char *word);
 int zip(int option_type, char ***fullindex, char *trovefile_name);
-int zcat(char ***fullindex);
+
 
 char ***build_trovefile(char *trovefilename, char ***strings_list, int str_ind);
 void remove_trove(char *trovefilename, char **filelist, int filelist_num);
