@@ -8,6 +8,8 @@ It can be used to:
 -Create a new index
 -Remove information from such an index
 -Update an existing index
+
+\bug: If file is blank, the word is undefined
 */
 
 #include <stdio.h>
@@ -117,6 +119,7 @@ int main(int argc, char *argv[])
     if (option_type == 3) {                 // -u called
         remove_trove(trovefile_name, filelist, filelist_num);
         find_file(filelist, filelist_num, option_type, trovefile_name, length);
+        
         printf("    Updated the trovfile!\n    exitting...\n");
     }
     

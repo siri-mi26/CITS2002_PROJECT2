@@ -79,9 +79,9 @@ int find_file(char **filelist, int filelist_num, int option_type, char *trove_fi
     {
         list_file(filelist[i], trove_filename, max_length);
     }
-    // -b was called
+
     
-    if (option_type == 1)
+    if (option_type == 1) // -b was called
     {
         
         char ***fullindex = build_trovefile(trove_filename, strings_list, str_ind);
@@ -134,11 +134,11 @@ int find_file(char **filelist, int filelist_num, int option_type, char *trove_fi
         // waitpid(pid1, NULL, 0);
         // waitpid(pid2, NULL, 0);
     }
-    // -u was called
-    if (option_type == 3)
+    
+    if (option_type == 3) // -u was called
     {
-
-        append_trovefile(trove_filename, strings_list, str_ind);
+        char *** fullindex = append_trovefile(trove_filename, strings_list, str_ind);
+        zip(option_type, fullindex, trove_filename);
     }
 
     return 0;
